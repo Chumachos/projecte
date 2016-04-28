@@ -17,7 +17,9 @@ Aquest repositòri està destinat a tots aquells arxius relacionats amb el proje
 Tots els documents han estat revisats i estudiats per mi mateix i contenen informació del títol esmentat anteriorment.
 
 ## Webgrafia
-[Introduction to Systemd and Journal](https://docs.google.com/document/u/1/pub?id=1IC9yOXj7j6cdLLxWEBAGRL6wl97tFxgjLUEHIX3MSTs)
+[Introduction to Systemd and Journal](https://docs.google.com/document/u/1/pub?id=1IC9yOXj7j6cdLLxWEBAGRL6wl97tFxgjLUEHIX3MSTs) - Pàgina del navegador
+
+[Introduction to Systemd and Journal](systemd_journal.html)- Pàgina local
 
 [Systemd System & Service Manager](https://www.freedesktop.org/wiki/Software/systemd/)
 
