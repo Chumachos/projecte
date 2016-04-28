@@ -7,6 +7,7 @@
 **Localització**: Barcelona
 
 **Curs**: ASIX-2 (2015-2016)
+
 **Títol del projecte**: Migració de Syslog a Journal
 
 
