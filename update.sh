@@ -8,5 +8,6 @@ datahora=$(date +%Y-%m-%d_%H:%M)
 cat README.md | sed -r "s/(Darrera actualització)[^*]*/\1 $datahora/g" > READMEtmp.md
 mv READMEtmp.md README.md
 git add --all
+echo "$1"
 git commit -am "$1"
 git push
