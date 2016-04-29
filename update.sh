@@ -4,7 +4,9 @@
 # ---------------------------------------------------------------
 
 datahora=$(date +%Y-%m-%d_%H:%M)
-sed=$(echo "sed -r 's/(Darrera actualització)[^*]*/\1 $datahora/g'")
-echo $sed
-echo "*Darrera actualització: 2016-04-28_12:34*" | $sed
-echo "$datahora a"
+
+cat README.md | sed -r "s/(Darrera actualització)[^*]*/\1 $datahora/g" > READMEtmp.md
+mv READMEtmp.md README.md
+git add --all
+git commit -am "$1"
+git push
