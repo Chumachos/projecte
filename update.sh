@@ -5,9 +5,14 @@
 
 datahora=$(date +%Y-%m-%d_%H:%M)
 
+# Crear arxiu on fer el nou volcat
 cat README.md | sed -r "s/(Darrera actualització)[^*]*/\1 $datahora/g" > READMEtmp.md
+
+# Realitzar volcat
 mv READMEtmp.md README.md
+
+# Actualitzar repositori
 git add --all
-echo "$1"
+# Missatge d'actualització
 git commit -am "$1"
 git push
