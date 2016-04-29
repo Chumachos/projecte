@@ -1,4 +1,5 @@
 #! /bin/bash
+# Autor: Carlos Hormigo
 # Descripció del script: Actualitza el repositòri actual
 # i la data de la darrera actualització del fitxer README.md
 # ---------------------------------------------------------------
