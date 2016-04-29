@@ -3,8 +3,8 @@
 # i la data de la darrera actualització del fitxer README.md
 # ---------------------------------------------------------------
 
-datahora=$(date +%Y-%m-%d_%H:%M)
-
+datahora_file=$(date +%Y-%m-%d_%H:%M)
+datahora_descrip=$(date +%Y/%m/%d_%H:%M)
 # Crear arxiu on fer el nou volcat
 cat README.md | sed -r "s/(Darrera actualització)[^*]*/\1 $datahora/g" > READMEtmp.md
 
@@ -14,5 +14,6 @@ mv READMEtmp.md README.md
 # Actualitzar repositori
 git add --all
 # Missatge d'actualització
-git commit -am "$1"
+git commit -am "$datahora_descrip""_""$1"
 git push
+
