@@ -21,4 +21,4 @@ Tots els documents han estat revisats i estudiats per mi mateix i contenen infor
 
 [Systemd System & Service Manager](https://www.freedesktop.org/wiki/Software/systemd/)
 
-*Darrera actualització 2016-05-02_13:58*
+*Darrera actualització 2016-05-03_10:29*
