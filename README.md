@@ -21,6 +21,6 @@ Tots els documents han estat revisats i estudiats per mi mateix i contenen infor
 
 [Systemd System & Service Manager](https://www.freedesktop.org/wiki/Software/systemd/)
     
-    1. [Using the Journal](http://0pointer.de/blog/projects/journalctl.html)
+1. [Using the Journal](http://0pointer.de/blog/projects/journalctl.html)
 
 *Darrera actualització 2016-05-03_12:27*
