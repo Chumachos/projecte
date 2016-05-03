@@ -21,8 +21,8 @@ Tots els documents han estat revisats i estudiats per mi mateix i contenen infor
  
 1. [Log and Service Status](http://0pointer.de/blog/projects/systemctl-journal.html)
 
-    1. [Introduction to Systemd and Journal](https://docs.google.com/document/u/1/pub?id=1IC9yOXj7j6cdLLxWEBAGRL6wl97tFxgjLUEHIX3MSTs)
+    * [Introduction to Systemd and Journal](https://docs.google.com/document/u/1/pub?id=1IC9yOXj7j6cdLLxWEBAGRL6wl97tFxgjLUEHIX3MSTs)
    
 2. ? [Using the Journal](http://0pointer.de/blog/projects/journalctl.html)
 
-*Darrera actualització 2016-05-03_13:03*
+*Darrera actualització 2016-05-03_13:04*
