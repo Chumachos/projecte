@@ -1,0 +1,55 @@
+  968  journalctl _COMM=pere
+  969  systemctl status
+  970  poweroff
+  971  vim /etc/rsyslog.conf 
+  972  vim /etc/sysctl.conf 
+  973  vim /etc/sysctl.d/99-sysctl.conf 
+  974  vim /etc/rsyslog.d/listen.conf 
+  975  systemctl status syslog
+  976  vim /etc/sysctl.conf 
+  977  tail -f /var/log/syslog
+  978  tail -f /var/log/messages
+  979  tail -f /var/log/syslog | egrep "slapd|dhclient"
+  980  tail -f /var/log/messages | egrep "slapd|dhclient"
+  981  ll /var/log/
+  982  cat /var/log/messages
+  983  cat /var/log/maillog
+  984  dmesg
+  985  dmesg | grep kernel
+  986  dmesg | sed 's/^............../
+  987  dmesg | sed 's/^............../'
+  988  dmesg | sed 's/^..............//'
+  989  mesg
+  990  mesg 
+  991  haed /var/log/messages
+  992  head /var/log/messages
+  993  head /var/log/messages | awk '{print $4}'
+  994  head /var/log/messages | awk '{print $5}'
+  995* head /var/log/messages | sed 's/^.*: //'
+  996  head /var/log/messages | awk '{print $5}'
+  997  head /var/log/messages | awk '{print $6}'
+  998* head /var/log/messages | awk '{print $6}'
+  999  head /var/log/messages 
+ 1000  head /var/log/messages | cut -d' ' -f5
+ 1001  head /var/log/messages | cut -d' ' -f7
+ 1002  head /var/log/messages | cut -d' ' -f7-
+ 1003  cat /var/log/messages | cut -d' ' -f7- | less
+ 1004  journal -o cat | less
+ 1005  journalct -o cat | less
+ 1006  journalctl -o cat | less
+ 1007  yum install -y jq
+ 1008  journalctl -o json-pretty | less
+ 1009  journalctl -o json | less
+ 1010  journalctl -o json | jq .
+ 1011  journalctl -o json | jq . | less
+ 1012  journalctl -o json | jq -C . | less
+ 1013  journalctl -o json | jq -C . | less -r
+ 1014  journalctl -o json | jq -C .MESSAGE | less -r
+ 1015  journalctl -o json | jq -R .MESSAGE 
+ 1016  journalctl -o json | jq -r .MESSAGE 
+ 1017  journalctl -o json | jq -C . | less -r
+ 1018  journalctl -o json | jq -C '.PRIORITY=6'   | less -r
+ 1019  journalctl -o json -p 6 
+ 1020  history
+ 1021  history | tail -50 
+ 1022  history | tail -55 > /tmp/historial-journal-syslog

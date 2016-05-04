@@ -25,4 +25,6 @@ Tots els documents han estat revisats i estudiats per mi mateix i contenen infor
    
 2. [Using the Journal](http://0pointer.de/blog/projects/journalctl.html) <-- Per mirar
 
-*Darrera actualització 2016-05-03_13:06*
+[Syslog configuration](http://blog.zwiegnet.com/linux-server/configure-logging-openldap-centos-6/)
+
+*Darrera actualització 2016-05-04_12:39*
