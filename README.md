@@ -28,4 +28,5 @@ Tots els documents han estat revisats i estudiats per mi mateix i contenen infor
 [Syslog configuration](http://blog.zwiegnet.com/linux-server/configure-logging-openldap-centos-6/)
 
 [Journal - Manipulate Systemd Logs](https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs)
-*Darrera actualització 2016-05-05_12:56*
+
+*Darrera actualització 2016-05-06_12:58*
