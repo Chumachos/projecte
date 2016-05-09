@@ -19,3 +19,4 @@
 
 * Traducció de la pàgina [Introduction to Systemd and Journal](https://docs.google.com/document/u/1/pub?id=1IC9yOXj7j6cdLLxWEBAGRL6wl97tFxgjLUEHIX3MSTs)
 
+
