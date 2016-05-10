@@ -29,4 +29,4 @@ Tots els documents han estat revisats i estudiats per mi mateix i contenen infor
 
 [Journal - Manipulate Systemd Logs](https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs)
 
-*Darrera actualització 2016-05-10_10:24*
+*Darrera actualització 2016-05-10_10:36*
