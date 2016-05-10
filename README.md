@@ -36,4 +36,4 @@ JournalWatch
 * [JournalWatch (GitHub)](https://github.com/The-Compiler/journalwatch) <-- Per mirar
 
 
-*Darrera actualització 2016-05-10_12:54*
+*Darrera actualització 2016-05-10_13:36*
