@@ -9,10 +9,10 @@ datahora_file=$(date +%Y-%m-%d_%H:%M)
 datahora_descrip=$(date +%Y/%m/%d_%H:%M)
 
 # Crear arxiu on fer el nou volcat
-cat README.md | sed -r "s/(Darrera actualització)[^*]*/\1 $datahora_file/g" > READMEtmp.md
+cat ../README.md | sed -r "s/(Darrera actualització)[^*]*/\1 $datahora_file/g" > READMEtmp.md
 
 # Realitzar volcat
-mv READMEtmp.md README.md
+mv READMEtmp.md ../README.md
 
 # Actualitzar repositori
 git add --all ../.
