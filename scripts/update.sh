@@ -15,7 +15,7 @@ cat README.md | sed -r "s/(Darrera actualització)[^*]*/\1 $datahora_file/g" > R
 mv READMEtmp.md README.md
 
 # Actualitzar repositori
-git add --all
+git add --all ../.
 # Missatge d'actualització
 git commit -am "$datahora_descrip""_""$1"
 # Pujar directori
