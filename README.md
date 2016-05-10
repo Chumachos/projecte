@@ -29,4 +29,11 @@ Tots els documents han estat revisats i estudiats per mi mateix i contenen infor
 
 [Journal - Manipulate Systemd Logs](https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs)
 
-*Darrera actualització 2016-05-10_10:41*
+JournalWatch
+
+* [JournalWatch (semblant a logwatch)](https://bbs.archlinux.org/viewtopic.php?id=184105) <-- Per mirar
+
+* [JournalWatch (GitHub)](https://github.com/The-Compiler/journalwatch) <-- Per mirar
+
+
+*Darrera actualització 2016-05-10_11:57*
