@@ -8,7 +8,7 @@
 **/etc/logrotate.conf** – configuració de rotació per a tots aquells arxius 
 de logs que s'especifiquin en el fitxer
 
-![Configuració logrotate.conf](etc.logrotate.conf.png)
+![Configuració logrotate.conf](/img/etc.logrotate.conf.png)
 
 **/etc/logrotate.d** - configuracions de rotació de logs de packets individuals
  instal·lats al sistema. Per exemple httpd o el packet yum.
@@ -108,6 +108,6 @@ i el path d'on es troba el script.
 
 2. Crear el script amb permisos apropiats (+x). En aquest cas estarà en /var/tmp/projecte/logrotate.
 
-	![Script que executa ordre per fer rotació](/img/var.tmp.projecte.scriptrotacio)
+	![Script que executa ordre per fer rotació](/img/var.tmp.projecte.scriptrotacio.png)
 
 3. Reiniciar servei de crond per a posar-ho en funcionament
