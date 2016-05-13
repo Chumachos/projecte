@@ -41,7 +41,7 @@ permet veure els missatges d'un usuari extrets de */var/mail/usuari-que-executa-
 És una eina que permet navegar a l'usuari pels seus missatges de manera més 
 fàcil, i seleccionar-ne un per veure el contingut.
 
-![Visualització de missatges desde mutt](/img/mutt-lista-missatges.png)
+![Visualització de missatges desde mutt](/img/mutt-llista-missatges.png)
 
 En la següent pàgina es pot visualitzar un exemple de com es mostren les 
 diferents parts de l'informe.
