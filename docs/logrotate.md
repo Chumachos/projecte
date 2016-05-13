@@ -21,8 +21,8 @@ com va ser el cas de **slapd**, ara es configurarà la rotació per als fitxers 
 
 	![Exemple configuració fitxer rotació slapd](/img/example.etc.logrotate.d.slapd.png)
 
-	* size: permetrà la rotació en el moment en que el fitxer slapd.log sigui igual 
-	o major al tamany especificat. Els diferents tamanys que es poden especificar són:
+* size: permetrà la rotació en el moment en que el fitxer slapd.log sigui igual 
+o major al tamany especificat. Els diferents tamanys que es poden especificar són:
 
 	* Sense lletra: es tracta de bytes.
 
@@ -30,20 +30,20 @@ com va ser el cas de **slapd**, ara es configurarà la rotació per als fitxers 
 
 	* G: gigabytes.
 
-	* create: s'especifican els permissos, propietàri i grup.
+* create: s'especifican els permissos, propietàri i grup.
 
-	* rotate: número de fitxers rotats com a màxim. Un cop arribats al màxim
-	s'esborraria el més antic i 	aniria rotaria.
+* rotate: número de fitxers rotats com a màxim. Un cop arribats al màxim
+s'esborraria el més antic i aniria rotaria.
 
-	* permet emmagatzemar en el nou fitxer slapd.log el contingut de logs generats.
-	De no fer-ho d'aquesta manera, crearia el fitxer slapd.log nou, però es 
-	seguiria enregistrant-se tot en el fitxer rotat.
+* permet emmagatzemar en el nou fitxer slapd.log el contingut de logs generats.
+De no fer-ho d'aquesta manera, crearia el fitxer slapd.log nou, però es 
+seguiria enregistrant-se tot en el fitxer rotat.
 
-	* arxiva versions antigues del fitxer de log mitjançant la extensió any-mes-dia
-	(YYYYMMDD)
+* arxiva versions antigues del fitxer de log mitjançant la extensió any-mes-dia
+(YYYYMMDD)
 
-	* dateformat: format del string que segueix al nom del fitxer. Per defecte
-	al PC de classe es tracta de l'any-mes-dia.
+* dateformat: format del string que segueix al nom del fitxer. Per defecte
+al PC de classe es tracta de l'any-mes-dia.
 
 2. S'omple el fitxer de logs (mitjançant **systemctl restart slapd**)
 
