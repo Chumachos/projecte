@@ -165,9 +165,12 @@ journalctl --unit *daemon-name*
 
 ### INFO BOOT
 journalctl --list-boots →llistar boots registrats
+
 journalctl --boot → llistar últim boot
+
 journalctl --boot -1 → llista info boot amb ID 1
-journalctl --boot -fc9....6e08 → llistar boot amb ID x
+
+journalctl --boot -fc9....6e08 → llistar boot amb ID x 
 
 ### LOGS SEGONS EL TEMPS
 Aquesta és una utilitat molt acertada per a aquells servidors que romanen 
