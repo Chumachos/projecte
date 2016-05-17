@@ -38,6 +38,10 @@ Per defecte, podem observar-hi el següent codi:
 	#MaxLevelKMsg=notice
 	#MaxLevelConsole=info
 
+El que aquest fitxer ens permet fer és el controlar els missatges dels
+logs de journal, administrar l'espai del disc i el de enviar els logs de journal
+cap a altres syslogs o serveis.
+
 ## Explicacions de les diferents opcions
 * **Storage**: controla on emmagatzemar les dades del journal. Les diferents 
 opcions que pot tenir són:
@@ -141,3 +145,48 @@ de 0-7 o "*emerg*", "*alert*", "*crit*", "*err*", "*warning*", "*notice*", "*inf
 
 * **TTYPath**: disponible si ForwardToConsole=yes. Canvia la consola TTY (per
 defecte */dev/console*).
+
+## EXEMPLES DE CONFIGURACIÓ DE ROTACIÓ DE JOURNAL
+### Exemple 1: Limitar a 3G com a espai màxim que journal pot ocupar
+Abans de tocar la configuració, mostro el resultat de fer la ordre **systemctl status systemd-journald.service**.
+
+	systemd-journald.service - Journal Service
+	   Loaded: loaded (/usr/lib/systemd/system/systemd-journald.service; static)
+	   Active: active (running) since Tue 2016-05-17 09:00:09 CEST; 3h 11min ago
+		 Docs: man:systemd-journald.service(8)
+			   man:journald.conf(5)
+	 Main PID: 320 (systemd-journal)
+	   Status: "Processing requests..."
+	   CGroup: /system.slice/systemd-journald.service
+			   └─320 /usr/lib/systemd/systemd-journald
+
+	May 17 09:00:10 i04.informatica.escoladeltreball.org systemd-journal[320]: Runtime journal is using 8.0M (max allowed 182.1M, trying to leave 273.2M free of 1.7G avail...182.1M).
+	May 17 09:00:10 i04.informatica.escoladeltreball.org systemd-journal[320]: Runtime journal is using 8.0M (max allowed 182.1M, trying to leave 273.2M free of 1.7G avail...182.1M).
+	May 17 09:00:10 i04.informatica.escoladeltreball.org systemd-journal[320]: Journal started
+	May 17 09:00:12 i04.informatica.escoladeltreball.org systemd-journal[320]: Permanent journal is using 1.5G (max allowed 4.0G, trying to leave 4.0G free of 64.2G availa...t 4.0G).
+	May 17 09:00:29 i04.informatica.escoladeltreball.org systemd-journal[320]: Time spent on flushing to /var is 17.792631s for 911 entries.
+	Hint: Some lines were ellipsized, use -l to show in full.
+
+El status ens mostra que el màxim d'ocupació en disc que es permet a journal és de 4G,
+que és la configuració per defecte.
+
+S'edita el fitxer **/etc/systemd/journald.conf**, i s'edita la opció pertinent:
+	
+	SystemMaxUse=3G
+
+Després de fer un **restart** del servei, al fer el status de nou es podrà visualitzar que ara
+el tamany màxim que pot ocupar journal és de 3G
+
+	systemd-journald.service - Journal Service
+	   Loaded: loaded (/usr/lib/systemd/system/systemd-journald.service; static)
+	   Active: active (running) since Tue 2016-05-17 12:11:31 CEST; 952ms ago
+		 Docs: man:systemd-journald.service(8)
+			   man:journald.conf(5)
+	 Main PID: 5671 (systemd-journal)
+	   Status: "Processing requests..."
+	   CGroup: /system.slice/systemd-journald.service
+			   └─5671 /usr/lib/systemd/systemd-journald
+
+	May 17 12:11:31 i04.informatica.escoladeltreball.org systemd-journal[5671]: Permanent journal is using 1.5G (max allowed 3.0G, trying to leave 4.0G free of 64.2G avail...t 3.0G).
+	May 17 12:11:31 i04.informatica.escoladeltreball.org systemd-journal[5671]: Journal started
+	Hint: Some lines were ellipsized, use -l to show in full.

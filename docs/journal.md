@@ -356,8 +356,8 @@ lliure encara que hagi d'emmagatzemar els logs
 
 * RuntimeMaxUse: tamany màxim que es pot utilitzar en un directori volatil (com /run)
 
-* RuntimeKeepFree: Specifies the amount of space to be set aside for other 
-uses when writing data to volatile storage (within the /run filesystem).
+* RuntimeKeepFree: controla l'espai que journal ha de deixar lliure
+	com a mínim per a altres usos.
 
 * RuntimeMaxFileSize: especifica el tamany màxim d'un arxiu del journal a 
 /run abans de ser rotat.
