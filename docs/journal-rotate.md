@@ -38,3 +38,98 @@ Per defecte, podem observar-hi el següent codi:
 	#MaxLevelKMsg=notice
 	#MaxLevelConsole=info
 
+## Explicacions de les diferents opcions
+* **Storage**: controla on emmagatzemar les dades del journal. Les diferents 
+opcions que pot tenir són:
+	* volatile: s'emmagatzema en memoria, com ara */run/log/journal*.
+	
+	* persistent: s'emmagatzema en disc, crea */var/log/journal* si cal, i amb
+	opció de ser emmagatzemat a /run/log/journal en cas que hi hagi qualsevol
+	tipus d'error, com per exemple que no hi hagi permís d'escriptura.
+	
+	* auto: similar a **persistent**, però no crea el directori */var/log/journal*
+	si no existeix, sinó que altres eines controlarien on anirien els logs.
+	
+	* None: no s'emmagatzema, tots els logs s'esborren automaticament.
+
+	Per defecte, la opció automàtica és **auto**.
+
+* **Compress**: (*yes*/*no*). Controla si es comprimeixen els logs emmagatzemats del journal.
+
+* **Seal**: (*yes*/*no*). Protegeix els fitxers de journal de qualsevol possible alteració
+mitjançant claus. (**FSS**, **F**orward **S**ecure **S**ealing)
+
+* **SplitMode**: controla on dividir els fitxers de journal. Les diferents opcions són:
+	* login: cada usuari loguejat (prèviament en el journal) rebrà el seu propi fitxer de journal.
+	
+	* uid: cada usuari amb *x* ID rebrà el seu pròpi fitxer de journal, 
+	independentment de si és un usuari registrat o d'un servei del sistema.
+	
+	* none: no es divideix el fitxer de journal a cap usuari. 
+	
+	Les dues primeres opcions s'aplicarien sempre i quan el mode d'emmagatzemament 
+	sigui en mode **persistent**, en cas contrari, només hi hauria un sol
+	fitxer de journal per a totes les ID d'usuari.
+
+* **RateLimitInterval**, RateLimitBurst: confingura el limit d'interval de temps en el 
+que el sistema pot generar logs. Si es configura mitjançant *RateLimitInterval* els serveis
+generaran més missatges que si es configura amb *RateLimitBurst*. Els missatges que es generin
+un cop sobrepassat el limit seran eliminats fins que es torni a reinicialitzar. 
+S'aplica cada el limit per cada servei.
+
+	Per defecte, es permeten 1000 missatges cada 30s.
+	
+	El temps per a especificar a la opció *RateLimitInterval* pren els valors
+	de "*s*", "*min*", "*h*", "*ms*" "*us*". **Si el valor és 0**, no hi ha limits.
+
+* **SystemMaxUse, SystemKeepFree, SystemMaxFileSize, RuntimeMaxUse, RuntimeKeepFree, RuntimeMaxFileSize**: 
+controla el tamany màxim que pot tenir un fitxer del journal emmagatzemat. 
+Les opcions amb prefix *System* s'aplica als fitxers quan estan en mode **persistent**.
+*Runtime* als que estan en mode **volatile**.
+
+	Per a que s'apliquin les regles, els fitxers del journal han d'acabar en 
+	*.journal* o *journal*.
+	
+	* **SystemMaxUse, RuntimeMaxUse**: controla espai que el journal pot emprar com  a màxim.
+	
+		Per defecte és el 10% del sistema.
+	
+	* **SystemKeepFree, RuntimeKeepFree**: controla l'espai que journal ha de deixar lliure
+	com a mínim per a altres usos.
+	
+		Per defecte ha de deixar lliure el 15% del sistema.
+	
+		**Atenció:** Si al arrencar systemd-journald es sobrepassa el limit que ha de deixar lliure
+		per al sistema, s'aturaria journald, però els arxius que sobrepassen els 
+		limits encara romandrien existents.
+	
+	* **SystemMaxFileSize, RuntimeMaxFileSize**: controla el tamany màxim individual
+	de cada fitxer de logs de journal. Els valors són K, M, G, T, P, E.
+
+* **MaxFileSec**: temps màxim que emmagatzemarà les entrades del journal 
+després de la rotació si és single journal file. Les opcions que pot prendre són: 0 (equival a que 
+sempre s'emmagatzemarà els fitxers, "*year*", "*month*", "*week*", "*day*", "*h*" o "*m*".
+
+* **MaxRetentionSec**: temps màxim que emmagatzemarà les entrades del journal
+
+* **SyncIntervalSec**: 
+
+* ForwardToSyslog, ForwardToKMsg, ForwardToConsole:
+
+* **MaxLevelStore, MaxLevelSyslog, MaxLevelKMsg, MaxLevelConsole**: controla
+el màxim nivell de missatges de logs emmagatzemats en el disc. Pren arguments
+de 0-7 o "*emerg*", "*alert*", "*crit*", "*err*", "*warning*", "*notice*", "*info*", "*debug*".
+
+	Els valors per defecte són:
+
+	* MaxLevelStore=debug
+	
+	* MaxLevelSyslog=debug
+	
+	* MaxLevelKMsg=notice
+	
+	* MaxLevelConsole=info
+
+
+* **TTYPath**: disponible si ForwardToConsole=yes. Canvia la consola TTY (per
+defecte */dev/console*).
