@@ -106,13 +106,17 @@ Les opcions amb prefix *System* s'aplica als fitxers quan estan en mode **persis
 	* **SystemMaxFileSize, RuntimeMaxFileSize**: controla el tamany màxim individual
 	de cada fitxer de logs de journal. Els valors són K, M, G, T, P, E.
 
-* **MaxFileSec**: temps màxim que emmagatzemarà les entrades del journal 
-després de la rotació si és single journal file. Les opcions que pot prendre són: 0 (equival a que 
+* **MaxFileSec**: temps màxim que emmagatzemarà les entrades en single journal file
+abans de la rotació. Les opcions que pot prendre són: 0 (equival a que 
 sempre s'emmagatzemarà els fitxers, "*year*", "*month*", "*week*", "*day*", "*h*" o "*m*".
 
-* **MaxRetentionSec**: temps màxim que emmagatzemarà les entrades del journal
+* **MaxRetentionSec**: temps màxim que emmagatzemarà les entrades del journal. 
+Controla que si els fitxers de journal contenen entrades més antigues vers 
+el temps especificat seràn eliminats. Les opcions que pot prendre són: 0 (equival a que 
+sempre s'emmagatzemarà els fitxers, "*year*", "*month*", "*week*", "*day*", "*h*" o "*m*".
 
-* **SyncIntervalSec**: . Només s'aplica a err, warning, notice, info, debug.
+* **SyncIntervalSec**: . Temps que ha de transcorrer abans de fer la sincronització
+del fitxer de journal cap al disc. Només s'aplica a err, warning, notice, info, debug.
 	
 	Per defecte és de 5min.
 
@@ -134,7 +138,6 @@ de 0-7 o "*emerg*", "*alert*", "*crit*", "*err*", "*warning*", "*notice*", "*inf
 	* MaxLevelKMsg=notice
 	
 	* MaxLevelConsole=info
-
 
 * **TTYPath**: disponible si ForwardToConsole=yes. Canvia la consola TTY (per
 defecte */dev/console*).
