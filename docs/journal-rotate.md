@@ -112,9 +112,14 @@ sempre s'emmagatzemarà els fitxers, "*year*", "*month*", "*week*", "*day*", "*h
 
 * **MaxRetentionSec**: temps màxim que emmagatzemarà les entrades del journal
 
-* **SyncIntervalSec**: 
+* **SyncIntervalSec**: . Només s'aplica a err, warning, notice, info, debug.
+	
+	Per defecte és de 5min.
 
-* ForwardToSyslog, ForwardToKMsg, ForwardToConsole:
+* **ForwardToSyslog, ForwardToKMsg, ForwardToConsole**: controla si els missatges
+d'errors serian enviats al dimoni de syslog, al buffer de logs del kernel o a 
+la consola del sistema. Si s'envien els missatges a syslog però aquest no està activat
+no hi haurà cap efecte.
 
 * **MaxLevelStore, MaxLevelSyslog, MaxLevelKMsg, MaxLevelConsole**: controla
 el màxim nivell de missatges de logs emmagatzemats en el disc. Pren arguments
