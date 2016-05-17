@@ -75,7 +75,7 @@ mitjançant claus. (**FSS**, **F**orward **S**ecure **S**ealing)
 	sigui en mode **persistent**, en cas contrari, només hi hauria un sol
 	fitxer de journal per a totes les ID d'usuari.
 
-* **RateLimitInterval**, RateLimitBurst: confingura el limit d'interval de temps en el 
+* **RateLimitInterval, RateLimitBurst**: configura el limit d'interval de temps en el 
 que el sistema pot generar logs. Si es configura mitjançant *RateLimitInterval* els serveis
 generaran més missatges que si es configura amb *RateLimitBurst*. Els missatges que es generin
 un cop sobrepassat el limit seran eliminats fins que es torni a reinicialitzar. 
