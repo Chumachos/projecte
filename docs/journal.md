@@ -132,8 +132,8 @@ that the process  identified by PID is described, instead of the process
 which logged the message.
 
 ### ADDRESS FIELDS
-During serialization into external formats, such as the Journal Export Format[1] 
-or the Journal JSON Format[2], the addresses of journal entries are serialized into 
+During serialization into external formats, such as the Journal Export Format 
+or the Journal JSON Format, the addresses of journal entries are serialized into 
 fields prefixed with double underscores. Note that these are not proper fields 
 when stored in the journal but for addressing metadata of entries. They cannot be 
 written as part of structured log entries via calls such as sd_journal_send(3). 
@@ -239,7 +239,7 @@ btenir una llista de UIDs o GIDs dels qual systemd disposa d'entrades de logs.
 ### LOGS DEL KERNEL
 journalctl -k (la ordre en format extens és: journalctl *--dmesg*)
 
-LLISTAR SEGONS LA PRIORITAT
+### LLISTAR SEGONS LA PRIORITAT
 Com a administradors del sistema, també interessa filtrar els missatges 
 segons la seva prioritat. Sovint és útil guardar els logs amb un alt nivell 
 de verbose, és a dir, amb gran quantitat d'informació, i quan es processa 
@@ -329,7 +329,7 @@ mostrant una linia per cada entrada.
 Per mostrar x número de logs, cal emprar la opció *-n* (**journalctl --lines=**), que 
 seria equivalen a *tail -n* (*tail --lines=*). Per defecte, mostra les 10 darreres entrades, és 
 a dir, les més recents. També es podria especificar un número després de *-n*, 
-per veure **y nombre d'entrades.
+per veure *y* nombre d'entrades.
 
 Per a visualitzar de manera continua els logs, la opció eś *-f* (**journalctl --follow**), 
 equivalent a tail *-f* (*tail --follow*).
