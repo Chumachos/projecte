@@ -88,12 +88,45 @@ en el fitxer) més el fitxer slapd.log.
 * hourly: rotació cada hora.
 
 * postrotate
+
   /path/to/script
+  
  endscript
+ 
 Utilitza un script personalitzat al ser executat el fitxer de configuració de rotació de slapd.
 * maxage: logrotate esborra automaticament l'arxiu rotat un cop transcorreguts x dies.
 
 * missingok: no retorna error si no hi ha arxiu de log.
+
+## EXEMPLE SCRIPT PER FER BACKUP
+Suposant que en una empresa demanen a l'administrador que no s'esborrin els
+fitxers que han estat rotats, he creat un script que s'executa després de
+la rotació i que copiarà els fitxers de logs que han rotat en una carpeta
+de backup.
+
+Per a fer-ho, els passos que he seguit han estat:
+
+1. Editar el fitxer de configuració del servei que continuament utilitzo
+com a exemple per a fer syslog, **slapd**, i afegir les següents linies:
+
+**/etc/logrotate.d/slapd**
+
+			postrotate
+			
+				/var/tmp/projecte/save-logrotate.sh
+			
+			endscript
+
+2. Provocar la rotació del servei, per a que s'executi el script.
+
+3. Comprovar que s'ha fet el backup dels logs
+
+			[isx53866409@i04 projecte]$ ll -h backup/
+			total 1.1M
+			-rw-r--r--. 1 root root 314K May 18 09:57 slapd.log-20160512-1463049001
+			-rw-r--r--. 1 root root 471K May 18 09:57 slapd.log-20160517-1463474706
+			-rw-r--r--. 1 root root 156K May 18 09:57 slapd.log-20160518-1463557104
+			-rw-r--r--. 1 root root 157K May 18 09:57 slapd.log-20160518-1463558264
 
 ## ROTACIÓ MITJANÇANT CRONTAB
 Si es vol establir que es realitzi a una hora/dia/mes concret, podriem 
