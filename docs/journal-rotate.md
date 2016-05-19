@@ -266,12 +266,38 @@ establerta.
 	-rw-r-----+ 1 root systemd-journal 4.0M May 18 12:05 user-201925.journal
 
 ### Exemple 3: Eliminar que no es generin logs per usuaris
+Prenent com a model el fitxer de log d'usuari mencionat en el exemple 2,
+vaig a provocar que journal deixi de generar aquest tipus de logs per als
+usuaris. Per a fer-ho, en el fitxer de configuració, es configura la següent
+opció:
 
+	SplitMode=none
 
+Es realitzen els mateixos passos que abans, amb la diferència que al tornar-se
+a connectar amb ssh, ja no es generarà de nou el fitxer com si que ho feia
+en l'exemple anterior.
 
+1. Reiniciar el servei: **systemctl restart systemd-journald**
 
+2. S'esborra el fitxer de log de journal de l'usuari en qüestió (el meu). 
 
+3. Tancar la sessió amb l'usuari.
 
+	* Si és mitjançant ssh, sortir de la sessió i tornar a entrar.
+	
+	* Si és mitjançant una sessió normal, reiniciar servei gdm: **systemctl restart gdm**.
+
+4. Tornar a connectar-se
+
+5. Fer un llistat dels arxius de **/var/log/journal/** i veure que no ha
+generat de nou el fitxer
+
+	[isx53866409@i23 ~]$ ll -h /var/log/journal/7dc4580e27be4581a3978fea99ae5c7c/user-201925.journal
+
+	ls: cannot access user-201925.journal: No such file or directory
+
+Això mostra que estan desactivats els logs que es generen per als usuaris. 
+Els únics logs que s'enregistraran aniran a **system.journal**.
 
 
 
