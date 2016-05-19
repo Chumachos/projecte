@@ -147,7 +147,7 @@ de 0-7 o "*emerg*", "*alert*", "*crit*", "*err*", "*warning*", "*notice*", "*inf
 defecte */dev/console*).
 
 ## EXEMPLES DE CONFIGURACIÓ DE ROTACIÓ DE JOURNAL
-### Exemple 1: Limitar a 3G com a espai màxim que journal pot ocupar
+### Exemple 1: Limitar a 3Gb com a espai màxim que journal pot ocupar
 Abans de tocar la configuració, mostro el resultat de fer la ordre **systemctl status systemd-journald.service**.
 
 	systemd-journald.service - Journal Service
@@ -175,7 +175,7 @@ S'edita el fitxer **/etc/systemd/journald.conf**, i s'edita la opció pertinent:
 	SystemMaxUse=3G
 
 Després de fer un **restart** del servei, al fer el status de nou es podrà visualitzar que ara
-el tamany màxim que pot ocupar journal és de 3G
+el tamany màxim que pot ocupar journal és de 3Gb
 
 	systemd-journald.service - Journal Service
 	   Loaded: loaded (/usr/lib/systemd/system/systemd-journald.service; static)
@@ -190,3 +190,93 @@ el tamany màxim que pot ocupar journal és de 3G
 	May 17 12:11:31 i04.informatica.escoladeltreball.org systemd-journal[5671]: Permanent journal is using 1.5G (max allowed 3.0G, trying to leave 4.0G free of 64.2G avail...t 3.0G).
 	May 17 12:11:31 i04.informatica.escoladeltreball.org systemd-journal[5671]: Journal started
 	Hint: Some lines were ellipsized, use -l to show in full.
+
+### Exemple 1.2: Limitar journal amb un tamany màxim inferior al que ocupa ara
+Segons la teoria, en el moment en que l'espai de logs que s'ocupa mitjançant
+journal és superior al que està configurat, el servei s'atura i no permet
+que augmenti el tamany de logs en disc.
+
+Amb la ordre **du -sh */var/log/journal*** miraré el tamany que ocupa, i 
+tot seguit, configuraré l'arxiu de journald.conf per que el tamany permès 
+sigui inferior.
+
+	[isx53866409@i23 ~]$ du -sh /var/log/journal/
+	163M	/var/log/journal/
+
+I tot seguit, editar **/etc/systemd/journald.conf**:
+
+	SystemMaxUse=150M
+
+Es fa un **restart** del servei **systemd-journald**, i comproven el status:
+
+	[isx53866409@i23 ~]$ systemctl status systemd-journald
+	systemd-journald.service - Journal Service
+	   Loaded: loaded (/usr/lib/systemd/system/systemd-journald.service; static)
+	   Active: active (running) since Wed 2016-05-18 11:40:37 CEST; 47s ago
+		 Docs: man:systemd-journald.service(8)
+			   man:journald.conf(5)
+	 Main PID: 3053 (systemd-journal)
+	   Status: "Processing requests..."
+	   CGroup: /system.slice/systemd-journald.service
+			   └─3053 /usr/lib/systemd/systemd-journald
+
+	May 18 11:40:37 i23.informatica.escoladeltreball.org systemd-journal[3053]: Permanent journal is using 162.0M (max allowed 150.0M, trying to leave 4.0G free of 71.3G a...162.0M).
+	May 18 11:40:37 i23.informatica.escoladeltreball.org systemd-journal[3053]: Journal started
+	Hint: Some lines were ellipsized, use -l to show in full.
+
+Com es pot visualitzar, el màxim permès està per sota del que ocupa actualment.
+Això demostra la teoria esmentada anteriorment de que no s'esborren els 
+arxius tot i estar per sobre del permès, sino que s'hauria de fer manualment.
+
+### Exemple 2: Canviar tamany màxim d'espai que pot ocupar un fitxer
+Utilitzant com a exemple el fitxer de log que es genera de l'usuari, mostro
+com el tamany per defecte és de 8M. 
+
+	[isx53866409@i23 ~]$ ll -h /var/log/journal/7dc4580e27be4581a3978fea99ae5c7c/
+
+	-rw-r-----+ 1 root systemd-journal 8.0M May 18 12:02 user-201925.journal
+
+Si es vol canviar, editem el fitxer de configuracio de journald.conf
+
+**/etc/systemd/journald.conf**
+
+	SystemMaxFileSize=4M
+
+Per a comprovar que realment s'han fet els canvis, s'han de seguir els
+següents passos:
+
+1. Reiniciar el servei: **systemctl restart systemd-journald**
+
+2. S'esborra el fitxer de log de journal de l'usuari en qüestió (el meu). 
+
+3. Tancar la sessió amb l'usuari.
+
+	* Si és mitjançant ssh, sortir de la sessió i tornar a entrar.
+	
+	* Si és mitjançant una sessió normal, reiniciar servei gdm: **systemctl restart gdm**.
+
+4. Tornar a connectar-se
+
+Si tornem a mostrar els fitxers i ens fixem en el mateix que registra els
+logs de l'usuari, el tamany màxim d'aquest ha disminuït degut a la configuració
+establerta. 
+
+	[isx53866409@i23 ~]$ ll -h /var/log/journal/7dc4580e27be4581a3978fea99ae5c7c/
+
+	-rw-r-----+ 1 root systemd-journal 4.0M May 18 12:05 user-201925.journal
+
+### Exemple 3: Eliminar que no es generin logs per usuaris
+
+
+
+
+
+
+
+
+
+
+
+
+
+
