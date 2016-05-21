@@ -300,9 +300,69 @@ Això mostra que estan desactivats els logs que es generen per als usuaris.
 Els únics logs que s'enregistraran aniran a **system.journal**.
 
 
+### Exemple 4: eliminar logs superiors a un temps predeterminat
+Si configurem l'arxiu **journald.conf** de manera que elimini tots aquells
+arxius de log que han sobrepassat cert temps establert, s'eliminaran
+**només** els que ha produït per missatges del sistema. En canvi, aquells
+logs que no siguin d'aquest tipus, és a dir, d'aquells que sigui de l'usuari,
+no seràn.
 
+Per a mostrar-ho, tenim la següent llista de fitxers de logs al directori
+*/var/log/journal/*:
 
+![Imatge de logs sense filtre](/img/all.logs.var.log.journal.png)
 
+S'estableix la opció de filtre per a que elimini aquells que sobrepassin
+el mes de distància:
 
+	MaxRetentionSec=1month
 
+Reiniciem el servei **systemd-journald**, i al mostrar de nou els logs
+de journal, es podrà comprovar que aquells **logs del sistema** que la seva
+data és superior a un mes, hauran desaparegut, a excepció dels fitxers
+de logs dels usuaris:
+
+![Logs filtrats amb 1 mes](/img/filtre.logs.var.log.journal.png)
+
+## DIFERÈNCIA FITXERS DE ROTACIÓ VERS SYSLOG
+Els fitxers de rotació de journal vers el de syslog es diferencien principalment
+en la manera en com s'acumulan els logs en els fitxers.
+
+Per una part, tenim els fitxers de syslog, que s'acumulen en un mateix
+fitxer fins que es sobrepassa la quantitat de tamany que està configurat per
+cadascun i es genera un d'altre.
+Tots els logs que es generen de syslog van dirigits al fitxer actiu fins 
+que aquest es rotat.
+
+Per una altre part, els fitxers de journal, també s'acumulen en un mateix
+fitxer com és el cas de syslog, amb la diferència en que aquest té una mida
+com a màxim, i quan es supera aquesta, en el mateix fitxer són eliminats els
+logs més antics i hi podem trobar els nous.
+
+Donat aquest fet, surt la qüestió de si es pot emmagatzemar d'alguna manera
+tota la quantitat de logs que genera journal per tal de que la informació
+no es perdi. Per a aconseguir això, exposaré dos diferents opcions a tenir en
+compte.
+
+### Exportar mitjançant journalctl
+Una de les opcions de journalctl ens permet controlar la visualització
+de logs en un determinat temps. Per exemple, si emprem la opció de 
+*`--since yesterday`*, obtindriem la llista de logs que han sorgit des del 
+passat dia.
+
+Aprofitant aquesta opció que ens dóna la eina de journalctl, podriem guardar
+en un fitxer tots aquells logs generats en l'últim dia. A més a més, mitjançant
+el crontab el configurem per a que cada dia s'emmagatzemi en un fitxer 
+els logs produïts en les darreres 24 hores.
+
+Per exemple, el crontab per a podria ser el següent:
+
+	* * */1 * * journalctl --since yesterday >> /var/tmp/projecte/backup-journal/journal.log
+
+### Deixar que ho fagi syslog
+Syslog conté diferents utilitats que journalctl no pot fer. Aquest és
+un d'aquests casos. Com journal de manera directa no hi ha cap utilitat que
+permeti realitzar còpies i emmagatzemar-les en el disc i encarà estem en un
+procés de migració, es podria prendre la decisió de tenir syslog per a 
+realitzar aquest funcionament de manera complementària a journal.
 
