@@ -1,4 +1,66 @@
 # SYSLOG
+Syslog és utilitzat per al registre de missatges, tant a nivell individual
+d'un sistema, com una xarxa informàtica. Permet la separació
+entre els logs generats, l'emmagatzematge que fa el sistema d'aquests i
+l'anàlisi dels logs.
+
+El sistema utilitza el syslog per a l'administració del sistema i la seguretat
+d'aquest, també com a mode de d'informació i anàlisi. Permet que els diferents
+tipus de logs del sistema quedint enregistrats en un repositori central.
+
+Syslog utilitza el dimoni amb el nom de **syslogd**, i aquest envia missatges
+mitjançant protocol UDP i el port 514, tot i que, si l'administrador així 
+ho desitja es podria arribar a enviar per TCP.
+
+El format de logs dels missatges és petit, el que fa que siguin versatil, i 
+és alhora el seu principal inconvenient. Com no hi ha una estructura definida, 
+molta informació del missatge es perd en la transformació, és poc entenible per 
+al llenguatge humà.
+
+Algunes de les seves característiques són:
+
+* El missatge no està autenticat. Qualsevol procés local podria fer-se 
+passar per un altre servei com ara Apache, i s'emmagatzemaria en disc.
+
+* El timestamp no acaba de definir concretament algunes especificacions 
+necessàries per a entendre-la sense cap error (exemple: 14:00, pero no de 
+quin horari (Japó, Europa, America...)).
+
+* Syslog és un dels diferents logs del sistema que hi ha al sistema. Hi 
+ha d'altres com ara de kernel, aplicacions especifiques, et.c.
+ 
+* Llegir els logs del fitxer és simple, pero no eficient. Es requereixen 
+certes operacions complexes.
+
+# RSYSLOG
+Implementa el syslog, extenent-lo amb altres utilitats, com ara una configuració
+més flexible amb diverses opcions i permet utilitzar TCP pel transport.
+
+Al nostre sistema operatiu de *Fedora*, **rsyslog** és el que s'utilitza desde
+Novembre de 2007, tot i que a *Fedora Heisenbug* aquest ha estat complementat
+per **journald**. 
+
+## Format per defecte dels missatges
+Una plantilla ens permet especificar el tipus de format en el qual es
+mostra un missatge loguejat. Una plantilla pot ser configurada per l'administrador
+del sistema, i en cas que no hagi estat configurada, s'utilitzaria la
+plantilla per defecte.
+
+Tenint en compte els missatges que es generen a */var/log/messages* o un 
+altre fitxer de logs com ara */var/log/maillog*,
+el format que tenen aquests fitxers és el següent:
+
+	TIMESTAMP HOST DAEMON MESSAGE
+
+Un exemple d'aquest format pot ser el següent, on el missatge ens permet veure
+quin tipus d'error s'ha generat:
+
+	May 22 18:07:52 fedora gnome-session: Fontconfig error: Cannot load default config file
+
+Els missatges de logs també podrien mostrar altres tipus de metadata, és a dir,
+informació sobre el missatge, com ara el **TAG** del missatge, **PROCID** per 
+poder veure la id del procés... etc.
+
 ## TIPUS DE FITXERS DE LOGS
 He considerat adient dividir els diferents tipus de logs que ens dóna el 
 sistema i que analitzaré en tres tipus. Per una banda trobem els que hi ha a /var/log/messages, 

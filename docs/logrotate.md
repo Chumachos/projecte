@@ -1,4 +1,15 @@
 # LOGROTATE
+Està dissenyat per a l'administració dels sistemes generant un conjunt de
+fitxers de logs. Permet també utilitats com ara la rotació automàtica i 
+la compressió dels fitxers de logs.
+Cada fitxer pot ésser rotat de manera diaria, setmanalment, mensualment o fins i
+tot quan aquest supera un tamany especificat.
+
+El més normal es que s'executi en el cron de manera diària. No rotaria
+un mateix fitxer de log méws d'un cop en un període d'un dia, a menys que
+el criteri per a la rotació es basi en el tamany o que s'utilitzi la
+opció `--force`.
+
 ## FITXERS DE CONFIGURACIÓ
 **/usr/sbin/logrotate** – la ordre de logrotate
 **/etc/cron.daily/logrotate** – script de shell que logrotate executa cada dia

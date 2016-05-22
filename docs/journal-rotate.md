@@ -1,4 +1,7 @@
 # ROTACIÓ AMB JOURNAL
+Permet la rotació dels fitxers de logs de journal que sobrepassen certs limits
+configurats, com ara el tamany o antiguitat que tenen.
+
 El fitxer de configuració dels logs generats per journal es troba a 
 */etc/systemd/journald.conf*.
 

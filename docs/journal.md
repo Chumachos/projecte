@@ -1,79 +1,59 @@
 # JOURNAL
-## CAMPS
-### CAMPS D'USUARIS (de clients)
-MESSAGE= 
-	The human-readable message string for this entry. This is supposed to be 
-	the primary text shown to the user. It is usually not translated (but 
-	might be in some cases), and is not supposed to be parsed for meta data.
+Systemd permet la unificació dels diferents tipus de missatge que es generen
+al sistema, ja sigui que provinguin de dimonis o de processos. El sistema que
+recull i administra els logs rep el nom de **journal**.
 
-MESSAGE_ID= 
-	A 128-bit message identifier ID for recognizing certain message types, if 
-	this is desirable. This should contain a 128-bit ID formatted as a 
-	lower-case hexadecimal string, without any separating dashes or suchlike. 
-	This is recommended to be a UUID-compatible ID, but this is not enforced, 
-	and formatted differently. Developers can generate a new ID for this 
-	purpose with journalctl –new-id.
+Aquest és implementat pel dimoni **journald**, que recull missatges de tot 
+tipus: kernel, initrd, serveis...
+
+Els fitxers de logs de journal estan en format binari, i han de ser processats
+per poder ser llegits. Aquest processat la fa la ordre `journalctl`. Aquesta
+ordre té una opció que permet mostrar els logs en diferents formats, que
+es presentaran en aquest tema.
+
+## Característiques de journal
+Algunes de les característiques que ens aporta journal vers syslog són les segúents:
+
+* Simplicitat: poc codi i mínim desperdici.
+
+* No requereix manteniment: es pot implementar rotació del journal.
+
+* Robust: la informació dels arxius de logs són accessibles per als administradors 
+i poden ser copiats a diferents hosts amb eines com *“scp”* o *“rsync”*. 
+No cal tenir el dimoni ences per a buscar arxius del journal.
+
+* Rendiment: és ràpid en termes de complexitat. És aconsellable per a poder 
+fer un seguiment i tenir un bon rendiment alhora.
+
+* Integració: Està integrat a la resta del sistema, ja que el logging és 
+crucial per a un servei.
+
+* Unificació: les diferents tecnologies de login haurien d'unificarse amb una mateixa
+estructura per a la informació, i així funciona journal. Les entrades de firmware 
+són seguides per les del kernel, i les ultimes, les d'usuaris.
+
+
+## CAMPS
+### EXEMPLES CAMPS D'USUARIS (de clients)
+MESSAGE= 
+
+	Cadena de missatge que pot entendre una persona
 
 PRIORITY= 
-	A priority value between 0 ("emerg") and 7 ("debug") formatted as a 
-	decimal string. This field is compatible with syslog's priority concept.
 
-CODE_FILE=, CODE_LINE=, CODE_FUNC= 
-	The code location generating this message, if known. Contains the source 
-	filename, the line number and the function name.
-
-ERRNO= 
-	The low-level Unix error number causing this entry, if any. Contains the 
-	numeric value of errno(3) formatted as a decimal string.
-
-SYSLOG_FACILITY=, SYSLOG_IDENTIFIER=, SYSLOG_PID= 
-	Syslog compatibility fields containing the facility (formatted as decimal 
-	string), the identifier string (i.e. "tag"), and the client PID. (Note 
-	that the tag is usually derived from glibc's program_invocation_short_name 
-	variable, see program_invocation_short_name(3).)
+	Valor de prioritat entre 0 ("emerg") i 7 ("debug"); compatible amb syslog
 
 ### CAMPS CONFIABLES (no poden ser alterats)
 _PID=, _UID=, _GID= 
-	The process, user, and group ID of the process the journal entry 
-	originates from formatted as a decimal string.
+
+	El proces, usuari, i ID del grup ID del procés.
 
 _COMM=, _EXE=, _CMDLINE= 
-	The name, the executable path, and the command line of the process the 
-	journal entry originates from.
-
-_CAP_EFFECTIVE= 
-	The effective capabilities(7) of the process the journal entry originates 
-	from. 
-
-_AUDIT_SESSION=, _AUDIT_LOGINUID= 
-	The session and login UID of the process the journal entry originates 
-	from, as maintained by the kernel audit subsystem. 
-
-_SYSTEMD_CGROUP=, _SYSTEMD_SESSION=, _SYSTEMD_UNIT=, _SYSTEMD_USER_UNIT=, 
-_SYSTEMD_OWNER_UID=, _SYSTEMD_SLICE= 
-	The control group path in the systemd hierarchy, the systemd session ID 
-	(if any), the systemd unit name (if any), the systemd user session unit 
-	name (if any), the owner UID of the systemd session (if any) and the 
-	systemd slice unit of the process the journal entry originates from. 
-
-_SELINUX_CONTEXT= 
-	The SELinux security context of the process the journal entry originates 
-	from. 
-
-_SOURCE_REALTIME_TIMESTAMP= 
-	The earliest trusted timestamp of the message, if any is known that is 
-	different from the reception time of the journal. This is the time in 
-	microseconds since the epoch UTC, formatted as a decimal string. 
-
-_BOOT_ID= 
-	The kernel boot ID for the boot the message was generated in, formatted as 
-	a 128-bit hexadecimal string. 
-
-_MACHINE_ID= 
-	The machine ID of the originating host, as available in machine-id(5). 
+	Nom del servei o path d'aquest del qual s'origina el procés.
 
 _HOSTNAME= 
-	
+
+	Nom del host d'on s'executa el servei.
 
 _TRANSPORT= 
 	How the entry was received by the journal service. Valid transports are: 

@@ -25,9 +25,15 @@ Tots els documents han estat revisats i estudiats per mi mateix i contenen infor
    
 2. [Using the Journal](http://0pointer.de/blog/projects/journalctl.html)
 
-[Syslog configuration](http://blog.zwiegnet.com/linux-server/configure-logging-openldap-centos-6/)
+[Syslog configuration rotate](http://blog.zwiegnet.com/linux-server/configure-logging-openldap-centos-6/)
 
 [Journal - Manipulate Systemd Logs](https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs)
+
+[Syslog](https://en.wikipedia.org/wiki/Syslog)
+
+[Rsyslog](https://en.wikipedia.org/wiki/Rsyslog)
+
+[Logwatch](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-logwatch-log-analyzer-and-reporter-on-a-vps)
 
 JournalWatch (info per interès, no aplicada a la redacció del projecte)
 
@@ -36,4 +42,4 @@ JournalWatch (info per interès, no aplicada a la redacció del projecte)
 * [JournalWatch (GitHub)](https://github.com/The-Compiler/journalwatch)
 
 
-*Darrera actualització 2016-05-22_13:59*
+*Darrera actualització 2016-05-22_20:15*
