@@ -27,4 +27,4 @@ de llegir comentaris i diverses opinions que journal **no està preparat**
 per a centralitzar els logs, degut als diferents problemes que comporta.
 
 Tot i això, si que es pot centralitzar els logs amb journal, però d'una
-manera més complicada que syslog.s
+manera més complicada que syslog.
