@@ -359,6 +359,9 @@ Per exemple, el crontab per a podria ser el següent:
 
 	* * */1 * * journalctl --since yesterday >> /var/tmp/projecte/backup-journal/journal.log
 
+També es podria passar la opció del tipus de sortida, com ara *`output=json-pretty`*
+i així tenir més informació dels logs.
+
 ### Deixar que ho fagi syslog
 Syslog conté diferents utilitats que journalctl no pot fer. Aquest és
 un d'aquests casos. Com journal de manera directa no hi ha cap utilitat que
