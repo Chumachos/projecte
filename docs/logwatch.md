@@ -83,35 +83,35 @@ Els passos a seguir són els següents:
 
 2. Personalitzar les opcions del fitxer /etc/logwatch/conf/logwatch.conf
 
-	 # {mail|stdout|file}
-	Output = mail
-	
-	 # Compte local o adreça de correu
-	MailFrom = Logwatch
+		 # {mail|stdout|file}
+		Output = mail
+		
+		 # Compte local o adreça de correu
+		MailFrom = Logwatch
 
-	MailTo = root
+		MailTo = root
 
-	 # Nivell de detall (0-10)
-	 # Alt = 10
-	Detail = 10
-	
-	 # Servei a monitoritzar {All|nom-servei}
-	Service = All
+		 # Nivell de detall (0-10)
+		 # Alt = 10
+		Detail = 10
+		
+		 # Servei a monitoritzar {All|nom-servei}
+		Service = All
 
 3. Comprovar els serveis i fitxers de logs més comuns del sistema que 
 logwatch és capaç de processar.
 	
-	[hscarlos@fedora ~]$ ls /usr/share/logwatch/default.conf/services/
-	afpd.conf       clamav.conf         dpkg.conf              freeradius.conf     iptables.conf       mysql-mmm.conf  php.conf               pureftpd.conf      samba.conf                spamassassin.conf  vdr.conf            zz-network.conf
-	amavis.conf     clamav-milter.conf  emerge.conf            ftpd-messages.conf  kernel.conf         named.conf      pix.conf               qmail.conf         saslauthd.conf            sshd2.conf         vpopmail.conf       zz-runtime.conf
-	arpwatch.conf   clam-update.conf    evtapplication.conf    ftpd-xferlog.conf   knockd.conf         netopia.conf    pluto.conf             qmail-pop3d.conf   scsi.conf                 sshd.conf          vsftpd.conf         zz-sys.conf
-	audit.conf      courier.conf        evtsecurity.conf       http.conf           lvm.conf            netscreen.conf  pop3.conf              qmail-pop3ds.conf  secure.conf               stunnel.conf       windows.conf        zz-zfs.conf
-	automount.conf  cron.conf           evtsystem.conf         http-error.conf     mailscanner.conf    oidentd.conf    portsentry.conf        qmail-send.conf    sendmail.conf             sudo.conf          xntpd.conf
-	autorpm.conf    denyhosts.conf      exim.conf              identd.conf         mdadm.conf          omsa.conf       postfix.conf           qmail-smtpd.conf   sendmail-largeboxes.conf  syslogd.conf       yum.conf
-	barracuda.conf  dhcpd.conf          eximstats.conf         imapd.conf          modprobe.conf       openvpn.conf    postgresql.conf        raid.conf          shaperd.conf              syslog-ng.conf     zypp.conf
-	bfd.conf        dirsrv.conf         extreme-networks.conf  init.conf           mod_security2.conf  pam.conf        pound.conf             resolver.conf      slon.conf                 tac_acc.conf       zz-disk_space.conf
-	cisco.conf      dnssec.conf         fail2ban.conf          in.qpopper.conf     mountd.conf         pam_pwdb.conf   proftpd-messages.conf  rsyslogd.conf      smartd.conf               tivoli-smc.conf    zz-fortune.conf
-	citadel.conf    dovecot.conf        fetchmail.conf         ipop3d.conf         mysql.conf          pam_unix.conf   puppet.conf            rt314.conf         sonicwall.conf            up2date.conf       zz-lm_sensors.conf
+		[hscarlos@fedora ~]$ ls /usr/share/logwatch/default.conf/services/
+		afpd.conf       clamav.conf         dpkg.conf              freeradius.conf     iptables.conf       mysql-mmm.conf  php.conf               pureftpd.conf      samba.conf                spamassassin.conf  vdr.conf            zz-network.conf
+		amavis.conf     clamav-milter.conf  emerge.conf            ftpd-messages.conf  kernel.conf         named.conf      pix.conf               qmail.conf         saslauthd.conf            sshd2.conf         vpopmail.conf       zz-runtime.conf
+		arpwatch.conf   clam-update.conf    evtapplication.conf    ftpd-xferlog.conf   knockd.conf         netopia.conf    pluto.conf             qmail-pop3d.conf   scsi.conf                 sshd.conf          vsftpd.conf         zz-sys.conf
+		audit.conf      courier.conf        evtsecurity.conf       http.conf           lvm.conf            netscreen.conf  pop3.conf              qmail-pop3ds.conf  secure.conf               stunnel.conf       windows.conf        zz-zfs.conf
+		automount.conf  cron.conf           evtsystem.conf         http-error.conf     mailscanner.conf    oidentd.conf    portsentry.conf        qmail-send.conf    sendmail.conf             sudo.conf          xntpd.conf
+		autorpm.conf    denyhosts.conf      exim.conf              identd.conf         mdadm.conf          omsa.conf       postfix.conf           qmail-smtpd.conf   sendmail-largeboxes.conf  syslogd.conf       yum.conf
+		barracuda.conf  dhcpd.conf          eximstats.conf         imapd.conf          modprobe.conf       openvpn.conf    postgresql.conf        raid.conf          shaperd.conf              syslog-ng.conf     zypp.conf
+		bfd.conf        dirsrv.conf         extreme-networks.conf  init.conf           mod_security2.conf  pam.conf        pound.conf             resolver.conf      slon.conf                 tac_acc.conf       zz-disk_space.conf
+		cisco.conf      dnssec.conf         fail2ban.conf          in.qpopper.conf     mountd.conf         pam_pwdb.conf   proftpd-messages.conf  rsyslogd.conf      smartd.conf               tivoli-smc.conf    zz-fortune.conf
+		citadel.conf    dovecot.conf        fetchmail.conf         ipop3d.conf         mysql.conf          pam_unix.conf   puppet.conf            rt314.conf         sonicwall.conf            up2date.conf       zz-lm_sensors.conf
 
 	[hscarlos@fedora ~]$ ls /usr/share/logwatch/default.conf/logfiles/
 
