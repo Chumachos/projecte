@@ -173,5 +173,5 @@ sobre quan s'ha reiniciat el nostre ordinador. Per a realitzar això, podriem
 emprar la utilitat de **grep**, filtrant les linies de la ordre journalctl que 
 més ens interessa:
 
-journalctl --since yesterday | grep --context=5 '^-- Reboot --$' | mail -s "Boot Report $(date)" root
+	journalctl --since yesterday | grep --context=5 '^-- Reboot --$' | mail -s "Boot Report $(date)" root
 
