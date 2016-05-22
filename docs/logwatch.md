@@ -83,19 +83,19 @@ Els passos a seguir són els següents:
 
 2. Personalitzar les opcions del fitxer /etc/logwatch/conf/logwatch.conf
 
-	# {mail|stdout|file}
+	 # {mail|stdout|file}
 	Output = mail
 	
-	# Compte local o adreça de correu
+	 # Compte local o adreça de correu
 	MailFrom = Logwatch
 
 	MailTo = root
 
-	# Nivell de detall (0-10)
-	# Alt = 10
+	 # Nivell de detall (0-10)
+	 # Alt = 10
 	Detail = 10
 	
-	# Servei a monitoritzar {All|nom-servei}
+	 # Servei a monitoritzar {All|nom-servei}
 	Service = All
 
 3. Comprovar els serveis i fitxers de logs més comuns del sistema que 
