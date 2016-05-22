@@ -55,19 +55,6 @@ _HOSTNAME=
 
 	Nom del host d'on s'executa el servei.
 
-_TRANSPORT= 
-	How the entry was received by the journal service. Valid transports are: 
-
-	* driver: for internally generated messages.
-
-	* syslog: for those received via the local syslog socket with the syslog protocol.
-
-	* journal: for those received via the native journal protocol.
-
-	* stdout: for those read from a service's standard output or error output.
-
-	* kernel: for those read from the kernel
-
 ### CAMPS DEL KERNEL
 _KERNEL_DEVICE= 
 	The kernel device name. If the entry is associated to a block device, the 
