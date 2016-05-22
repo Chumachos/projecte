@@ -117,7 +117,7 @@ logwatch és capaç de processar.
 
 4. Debug de logwatch per a que envii el informe a root
 
-	/usr/share/logwatch/scripts/logwatch.pl --debug 10 > debug_logwatch.txt
+		/usr/share/logwatch/scripts/logwatch.pl --debug 10 > debug_logwatch.txt
 
 Si desde root es visualitza els mails que ha rebut, es podrà veure el següent missatge:
 
