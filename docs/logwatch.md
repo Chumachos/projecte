@@ -188,7 +188,20 @@ logwatch és capaç de processar.
 		cisco.conf      dnssec.conf         fail2ban.conf          in.qpopper.conf     mountd.conf         pam_pwdb.conf   proftpd-messages.conf  rsyslogd.conf      smartd.conf               tivoli-smc.conf    zz-fortune.conf
 		citadel.conf    dovecot.conf        fetchmail.conf         ipop3d.conf         mysql.conf          pam_unix.conf   puppet.conf            rt314.conf         sonicwall.conf            up2date.conf       zz-lm_sensors.conf
 
-	[hscarlos@fedora ~]$ ls /usr/share/logwatch/default.conf/logfiles/
+
+		[hscarlos@fedora scripts]$ ls /usr/share/logwatch/default.conf/logfiles/
+		audit_log.conf    dnssec.conf            kernel.conf      qmail-pop3d-current.conf   tac_acc.conf
+		autorpm.conf      dpkg.conf              maillog.conf     qmail-pop3ds-current.conf  tivoli-smc.conf
+		bfd.conf          emerge.conf            messages.conf    qmail-send-current.conf    up2date.conf
+		cisco.conf        eventlog.conf          mysql.conf       qmail-smtpd-current.conf   vdr.conf
+		citadel.conf      exim.conf              mysql-mmm.conf   resolver.conf              vsftpd.conf
+		clamav.conf       extreme-networks.conf  netopia.conf     rt314.conf                 windows.conf
+		clam-update.conf  fail2ban.conf          netscreen.conf   samba.conf                 xferlog.conf
+		cron.conf         freeradius.conf        php.conf         secure.conf                yum.conf
+		daemon.conf       http.conf              pix.conf         sonicwall.conf             zypp.conf
+		denyhosts.conf    http-error.conf        postgresql.conf  spamassassin.conf
+		dirsrv.conf       iptables.conf          pureftp.conf     syslog.conf
+
 
 4. Debug de logwatch per a que envii el informe a root
 
