@@ -20,6 +20,14 @@ s'ha d'afegir la següent linia amb la substitució corresponent:
 
 	SERVEI_A_ENVIAR @IP_HOST_DESTI:PORT
 
+	Per exemple:
+	
+	authpriv.* @192.168.2.34:514
+
+Si miressim la configuració del servidor (**/etc/rsyslog.conf**), aquest 
+servei estaria redireccionat a un directori:
+
+	authpriv.*  /var/log/secure
 
 # Centralització de logs amb journal
 Per a la centralització de logs amb systemd s'utilitzarà el sistema operatiu
