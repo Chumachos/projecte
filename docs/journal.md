@@ -37,57 +37,59 @@ són seguides per les del kernel, i les ultimes, les d'usuaris.
 ### CAMPS D'USUARIS (de clients)
 MESSAGE= 
 
-	Cadena de missatge que pot entendre una persona
+Cadena de missatge que pot entendre una persona
 
 PRIORITY= 
 
-	Valor de prioritat entre 0 ("emerg") i 7 ("debug"); compatible amb syslog
+Valor de prioritat entre 0 ("emerg") i 7 ("debug"); compatible amb syslog
 
 ### CAMPS CONFIABLES (no poden ser alterats)
 _PID=, _UID=, _GID= 
 
-	El proces, usuari, i ID del grup ID del procés.
+El proces, usuari, i ID del grup ID del procés.
 
 _COMM=, _EXE=, _CMDLINE= 
 
-	Nom del servei o path d'aquest del qual s'origina el procés.
+Nom del servei o path d'aquest del qual s'origina el procés.
 
 _HOSTNAME= 
 
-	Nom del host d'on s'executa el servei.
+Nom del host d'on s'executa el servei.
 
 ### CAMPS DEL KERNEL
 _KERNEL_DEVICE= 
 
-	Nom del device del kernel
+Nom del device del kernel
 	  
 _UDEV_DEVNODE= 
 	
-	Node del path del device (/dev)-
+Node del path del device (/dev)-
 	  
 
 
 ### CAMPS EMPRATS PER PROGRAMES
 OBJECT_PID=PID 
 
-	PID del programa al qual pertany el missatge. 
+PID del programa al qual pertany el missatge. 
 
 __REALTIME_TIMESTAMP= 
 
-	Temps en el qual journal ha rebut la entrada segons UTC, en un format
-	que mostra els microsegons
+Temps en el qual journal ha rebut la entrada segons UTC, en un format
+que mostra els microsegons
 
 __MONOTONIC_TIMESTAMP= 
 
-	Temps en format monotonic(CLOCK_MONOTONIC) que es mostrat segons en quin
-	moment journal ha rebut, en un format que mostra els microsegons.
-	Pot ser combinat amb "_BOOT_ID=". 
+Temps en format monotonic(CLOCK_MONOTONIC) que es mostrat segons en quin
+moment journal ha rebut, en un format que mostra els microsegons.
+Pot ser combinat amb "_BOOT_ID=". 
 
 
 ## MANIPULAR SYSTEMD AMB JOURNAL
 ### BUSCAR LOG SERVEI
 journalctl *path-to-daemon*
+
 journalctl _COMM=*daemon-name*
+
 journalctl --unit *daemon-name*
 
 ### INFO BOOT

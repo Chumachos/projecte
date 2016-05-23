@@ -251,7 +251,7 @@ i el path d'on es troba el script.
 
 		*/1 * * * * root       /var/tmp/projecte/logrotate.sh
 
-2. Crear el script amb permisos apropiats (+x). En aquest cas estarà en /var/tmp/projecte/logrotate.sh
+2. Crear el script amb permisos apropiats (+x). En aquest cas estarà en **/var/tmp/projecte/logrotate.sh**
 
 		#! /bin/bash
 

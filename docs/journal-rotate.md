@@ -411,7 +411,7 @@ els logs produïts en les darreres 24 hores.
 
 Per exemple, el crontab per a podria ser el següent:
 
-	* * */1 * * journalctl --since yesterday >> /var/tmp/projecte/backup-journal/journal.log
+	0 0 */1 * * journalctl --since yesterday >> /var/tmp/projecte/backup-journal/journal.log
 
 També es podria passar la opció del tipus de sortida, com ara *`output=json-pretty`*
 i així tenir més informació dels logs.
