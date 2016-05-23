@@ -9,13 +9,37 @@ Logwatch és una eina que serveix per analitzar i reportar els missatges de logs
 L'arxiu per a configurar el logwatch, per defecte no genera cap tipus de log i 
 ha d'ésser editat. Aquest arxiu es troba a **/etc/cron.daily/0logwatch**.
 
-![Configuració per defecte de 0logwatch](img/etc.cron.daily.0logwatch.default.png)
+	#!/bin/sh
+
+	#Set logwatch location
+	LOGWATCH_SCRIPT="/usr/sbin/logwatch"
+	#Add options to this line. Most options should be defined in /etc/logwatch/conf/logwatch.conf,
+	#but some are only for the nightly cronrun such as --output mail and should be set here.
+	#Other options to consider might be "--format html" or "--encode base64", man logwatch for more details.
+	OPTIONS="--output mail"
+
+	#Call logwatch
+	$LOGWATCH_SCRIPT $OPTIONS
+
+	exit 0
 
 Això va provocar a l'hora de provar-ho que ni tan sols root, al no generar 
 logwatch missatges, rebés res al seu correu. Per a solucionar aquest problema, 
 calia afegir noves opcions per defecte en la variable definida al arxiu.
 
-![Configuració personalitzada de 0logwatch](img/etc.cron.daily.0logwatch.configurat.png)
+	#!/bin/sh
+
+	#Set logwatch location
+	LOGWATCH_SCRIPT="/usr/sbin/logwatch"
+	#Add options to this line. Most options should be defined in /etc/logwatch/conf/logwatch.conf,
+	#but some are only for the nightly cronrun such as --output mail and should be set here.
+	#Other options to consider might be "--format html" or "--encode base64", man logwatch for more details.
+	OPTIONS="--output mail --mailto root --detail 10 --service All"
+
+	#Call logwatch
+	$LOGWATCH_SCRIPT $OPTIONS
+
+	exit 0
 
 Les opcions afegides, com es pot observar són les següents:
 * --mailto: per defecte root ja rep els missatges generats per logwatch, 
@@ -41,7 +65,9 @@ permet veure els missatges d'un usuari extrets de */var/mail/usuari-que-executa-
 És una eina que permet navegar a l'usuari pels seus missatges de manera més 
 fàcil, i seleccionar-ne un per veure el contingut.
 
-![Visualització de missatges desde mutt](img/mutt-llista-missatges.png)
+	   1   + May 09 logwatch@i04.in ( 237) Logwatch for i04.informatica.escoladeltreball.org (Linux)
+	   2   + May 09 logwatch@i04.in ( 238) Logwatch for i04.informatica.escoladeltreball.org (Linux)
+
 
 En la següent pàgina es pot visualitzar un exemple de com es mostren les 
 diferents parts de l'informe.
@@ -67,7 +93,56 @@ Prenent aquestes explicacions dels camps del cron, l'exemple definit per a
 executar el script equival a ser executat una vegada al mes, ja que està 
 configurat per a que s'executi el dia 1 del mes.
 
-![Visualització desde mutt informe logwatch](img/mutt-exemple-informe.png)
+	Date: Mon, 9 May 2016 12:46:03 +0200
+	From: logwatch@i04.informatica.escoladeltreball.org
+	To: root@i04.informatica.escoladeltreball.org
+	Subject: Logwatch for i04.informatica.escoladeltreball.org (Linux)
+
+
+	 ################### Logwatch 7.4.0 (03/01/11) ####################
+			Processing Initiated: Mon May  9 12:46:03 2016
+			Date Range Processed: yesterday
+								  ( 2016-May-08 )
+								  Period is day.
+			Detail Level of Output: 10
+			Type of Output/Format: mail / text
+			Logfiles for Host: i04.informatica.escoladeltreball.org
+	 ##################################################################
+
+	 --------------------- System Configuration Begin ------------------------
+
+		CPU:     4 Intel(R) Core(TM) i5-3330 CPU @ 3.00GHz at 3095MHz
+		Machine: x86_64
+		Release: Linux 3.19.8-100.fc20.x86_64
+		Total Memory:    3643 MB
+		Free Memory:      575 MB
+		Swap Used:          0 MB
+
+	 ---------------------- System Configuration End -------------------------
+
+
+	 --------------------- Disk Space Begin ------------------------
+
+	 Filesystem	  Size  Used Avail Use% Mounted on
+	 devtmpfs         1.8G     0  1.8G   0% /dev
+	 /dev/sda5         99G   29G   65G  31% /
+	 gandhi://groups  197G  106G   81G  57% /home/groups
+	 /dev/sdb1         30G  4.1G   26G  14% /run/media/isx53866409/CHARLY
+
+
+	 ---------------------- Disk Space End -------------------------
+
+
+	 --------------------- Fortune Begin ------------------------
+
+	 ... of course, this probably only happens for tcsh which uses wait4(),
+	 which is why I never saw it.  Serves people who use that abomination
+	 right 8^)
+		-- Linus Torvalds, about a patch that fixes getrusage for 1.3.26
+
+
+	 ---------------------- Fortune End -------------------------
+
 
 ## COM FER LOGWATCH - EXEMPLE 2
 Després de mirar maneres més senzilles de poder fer servir el logwatch, configurant
