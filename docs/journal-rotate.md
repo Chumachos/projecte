@@ -313,7 +313,7 @@ no seràn.
 Per a mostrar-ho, tenim la següent llista de fitxers de logs al directori
 */var/log/journal/*:
 
-![Imatge de logs sense filtre](/img/all.logs.var.log.journal.png)
+![Imatge de logs sense filtre](img/all.logs.var.log.journal.png)
 
 S'estableix la opció de filtre per a que elimini aquells que sobrepassin
 el mes de distància:
@@ -325,7 +325,7 @@ de journal, es podrà comprovar que aquells **logs del sistema** que la seva
 data és superior a un mes, hauran desaparegut, a excepció dels fitxers
 de logs dels usuaris:
 
-![Logs filtrats amb 1 mes](/img/filtre.logs.var.log.journal.png)
+![Logs filtrats amb 1 mes](img/filtre.logs.var.log.journal.png)
 
 ## DIFERÈNCIA FITXERS DE ROTACIÓ VERS SYSLOG
 Els fitxers de rotació de journal vers el de syslog es diferencien principalment

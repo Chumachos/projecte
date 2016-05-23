@@ -105,14 +105,12 @@ no funciona:
 
 	Failed to read state file /var/lib/systemd/journal-upload/state: Permission denied
 
-Una solució, tot i que incorrecte, seria la de canviar els permisos al directori
-i permetre que qualsevol tingui accés. Per tant es realitzarà la ordre
-`chmod 777 /var/lib/systemd/journal-upload`. Es torna a realitzar les dues ordres
-anteriors i ja tindriem el client preparat per a enviar logs.
-
-Afegir a l'usuari al grup per a que pugui escriure i veure el directori:
+Una solució és afegir a l'usuari al grup per a que pugui escriure i veure el directori:
 
 	usermod -a -G systemd-journal systemd-journal-remote 
+
+Es torna a realitzar les dues ordres anteriors per reiniciar els dimonis i 
+reiniciar el servei i ja tindriem el client preparat per a enviar logs.
 
 
 ## Comprovacions

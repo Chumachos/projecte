@@ -14,12 +14,12 @@ opció `--force`.
 **/usr/sbin/logrotate** – la ordre de logrotate
 **/etc/cron.daily/logrotate** – script de shell que logrotate executa cada dia
 
-![Script logrotate](/img/etc.cron.daily.logrotate.png)
+![Script logrotate](img/etc.cron.daily.logrotate.png)
 
 **/etc/logrotate.conf** – configuració de rotació per a tots aquells arxius 
 de logs que s'especifiquin en el fitxer
 
-![Configuració logrotate.conf](/img/etc.logrotate.conf.png)
+![Configuració logrotate.conf](img/etc.logrotate.conf.png)
 
 **/etc/logrotate.d** - configuracions de rotació de logs de packets individuals
  instal·lats al sistema. Per exemple httpd o el packet yum.
@@ -30,7 +30,7 @@ com va ser el cas de **slapd**, ara es configurarà la rotació per als fitxers 
 
 1. Creem la configuració per a slapd al fitxer */etc/logrotate.d/slapd*
 
-	![Exemple configuració fitxer rotació slapd](/img/example.etc.logrotate.d.slapd.png)
+	![Exemple configuració fitxer rotació slapd](img/example.etc.logrotate.d.slapd.png)
 
 * size: permetrà la rotació en el moment en que el fitxer slapd.log sigui igual 
 o major al tamany especificat. Els diferents tamanys que es poden especificar són:
@@ -58,9 +58,9 @@ al PC de classe es tracta de l'any-mes-dia.
 
 2. S'omple el fitxer de logs (mitjançant **systemctl restart slapd**)
 
-	![Log de slapd buit](/img/var.log.slapd.with-logs.png)
+	![Log de slapd buit](img/var.log.slapd.with-logs.png)
 
-	![Log de slapd amb missatges](/img/var.log.slapd.no-logs.png)
+	![Log de slapd amb missatges](img/var.log.slapd.no-logs.png)
 
 3. Es realitza la següent ordre, per rotar el fitxer slapd.log un cop ja 
 ha sobrepassat el limit establert configurat (100K). La ordre rotarà tots 
@@ -75,9 +75,9 @@ slapd creat per a que només faci la rotació d'aquest:
 4. Es torna a comprovar que realment s'ha rotat el fitxer, i tornem a afegir-hi dades 
 (**systemctl restart slapd** x2)
 
-	![Fitxer rotat. Creat nou fitxer de logs](/img/var.log.slapd.rotate1.png)
+	![Fitxer rotat. Creat nou fitxer de logs](img/var.log.slapd.rotate1.png)
 
-	![Visualització nou arxiu de logs](/img/var.log.slapd.rotate2.png)
+	![Visualització nou arxiu de logs](img/var.log.slapd.rotate2.png)
 
 Aquests passos si es tornen a realitzar crearien un nou fitxer rotat, i 
 hauria fins un màxim de 4 rotats (per la configuració que s'ha establert 
@@ -98,11 +98,14 @@ en el fitxer) més el fitxer slapd.log.
 
 * hourly: rotació cada hora.
 
-* postrotate
+* Path to script:
 
-  /path/to/script
+		postrotate
+
+		  /path/to/script
   
- endscript
+		endscript
+ 
  
 Utilitza un script personalitzat al ser executat el fitxer de configuració de rotació de slapd.
 * maxage: logrotate esborra automaticament l'arxiu rotat un cop transcorreguts x dies.
@@ -160,10 +163,10 @@ següent:
 de quan executar el script que es crearà, en nom de quin usuari s'executarà, 
 i el path d'on es troba el script.
 
-	![Temps per a la rotació mitjançant script](/img/etc.cron.d.logrotate.png)
+	![Temps per a la rotació mitjançant script](img/etc.cron.d.logrotate.png)
 
 2. Crear el script amb permisos apropiats (+x). En aquest cas estarà en /var/tmp/projecte/logrotate.
 
-	![Script que executa ordre per fer rotació](/img/var.tmp.projecte.scriptrotacio.png)
+	![Script que executa ordre per fer rotació](img/var.tmp.projecte.scriptrotacio.png)
 
 3. Reiniciar servei de crond per a posar-ho en funcionament

@@ -9,13 +9,13 @@ Logwatch és una eina que serveix per analitzar i reportar els missatges de logs
 L'arxiu per a configurar el logwatch, per defecte no genera cap tipus de log i 
 ha d'ésser editat. Aquest arxiu es troba a **/etc/cron.daily/0logwatch**.
 
-![Configuració per defecte de 0logwatch](/img/etc.cron.daily.0logwatch.default.png)
+![Configuració per defecte de 0logwatch](img/etc.cron.daily.0logwatch.default.png)
 
 Això va provocar a l'hora de provar-ho que ni tan sols root, al no generar 
 logwatch missatges, rebés res al seu correu. Per a solucionar aquest problema, 
 calia afegir noves opcions per defecte en la variable definida al arxiu.
 
-![Configuració personalitzada de 0logwatch](/img/etc.cron.daily.0logwatch.configurat.png)
+![Configuració personalitzada de 0logwatch](img/etc.cron.daily.0logwatch.configurat.png)
 
 Les opcions afegides, com es pot observar són les següents:
 * --mailto: per defecte root ja rep els missatges generats per logwatch, 
@@ -41,7 +41,7 @@ permet veure els missatges d'un usuari extrets de */var/mail/usuari-que-executa-
 És una eina que permet navegar a l'usuari pels seus missatges de manera més 
 fàcil, i seleccionar-ne un per veure el contingut.
 
-![Visualització de missatges desde mutt](/img/mutt-llista-missatges.png)
+![Visualització de missatges desde mutt](img/mutt-llista-missatges.png)
 
 En la següent pàgina es pot visualitzar un exemple de com es mostren les 
 diferents parts de l'informe.
@@ -67,7 +67,7 @@ Prenent aquestes explicacions dels camps del cron, l'exemple definit per a
 executar el script equival a ser executat una vegada al mes, ja que està 
 configurat per a que s'executi el dia 1 del mes.
 
-![Visualització desde mutt informe logwatch](/img/mutt-exemple-informe.png)
+![Visualització desde mutt informe logwatch](img/mutt-exemple-informe.png)
 
 ## COM FER LOGWATCH - EXEMPLE 2
 Després de mirar maneres més senzilles de poder fer servir el logwatch, configurant

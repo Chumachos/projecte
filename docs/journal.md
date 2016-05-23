@@ -176,13 +176,13 @@ Exemple pràctic: Visualització dels logs en els darrers 5min.
 
 1. Es mostrarà que no hi ha cap log:
 
-![Exemple que no hi ha logs en x min](/img/no-logs-time.png)
+![Exemple que no hi ha logs en x min](img/no-logs-time.png)
 
 2. Encenem servei slapd, per a que generi logs: **systemctl start slapd**
 
 3. Tornem a comprovar els logs en el mateix interval de temps que abans.
 
-![Exemple logs en x minuts](/img/logs-time.png)
+![Exemple logs en x minuts](img/logs-time.png)
 
 ### FILTRAR PER PROCES, USUARI O GRUPID
 Donat un determinat servei, pot tenir diversos processos fills. Si es vol 
@@ -236,7 +236,7 @@ nivel de prioritat i, a més a més, les que pertanyin a un nivell per sobre
 (més importants). Per exemple, si seleccionem el nivell d'alerta 2, mostrarà 
 els logs de crit (2), alert (1) i emerg (0).
 
-![Exemple prioritat seleccionada](/img/uniq-priority-journal.png)
+![Exemple prioritat seleccionada](img/uniq-priority-journal.png)
 
 ### TOT JOURNAL OUTPUT
 Per defecte, la ordre journalctl mostra només una pàgina de la sortida per 
@@ -252,45 +252,45 @@ cal emprar la opció *-o* (*--output=*). Els diferents tipus d'opcions són:
 * short : és el format per defecte més semblant als arxius de syslog, 
 mostrant una linia per cada entrada.
 
-![journalctl format short](/img/journalctl-format-short.png)
+![journalctl format short](img/journalctl-format-short.png)
 
 * short-iso : similar a short, però horari segons 8601
 
-![journalctl format short-iso](/img/journalctl-format-short-iso.png)
+![journalctl format short-iso](img/journalctl-format-short-iso.png)
 
 * short-precise : similar a short, però mostrant el temps amb microsegons inclosos.
 
-![journalctl format short-precise](/img/journalctl-format-short-precise.png)
+![journalctl format short-precise](img/journalctl-format-short-precise.png)
 
 * short-monotonic : mostra el temps en format monotonic.
 
-![journalctl format short-monotonic](/img/journalctl-format-short-monotonic.png)
+![journalctl format short-monotonic](img/journalctl-format-short-monotonic.png)
 
 * verbose: mostra mitjançant camps estructurats tota la informació del log.
 
-![journalctl format verbose](/img/journalctl-format-verbose.png)
+![journalctl format verbose](img/journalctl-format-verbose.png)
 
 * export: exporta journal en format binari per a poder enviar-lo per xarxa. També serveix per a backups
 
-![journalctl format export](/img/journalctl-format-export.png)
+![journalctl format export](img/journalctl-format-export.png)
 
 * json: entrades amb estructures de tipus JSON
 
-![journalctl format json](/img/journalctl-format-json.png)
+![journalctl format json](img/journalctl-format-json.png)
 
 * json-pretty: entrades amb estructures de tipus JSON, però el format és de múltiples linies per cada entrada, permetent que sigui més llegible.
 
-![journalctl format json-pretty](/img/journalctl-format-json-pretty1.png)
+![journalctl format json-pretty](img/journalctl-format-json-pretty1.png)
 
-![journalctl format json-pretty](/img/journalctl-format-json-pretty2.png)
+![journalctl format json-pretty](img/journalctl-format-json-pretty2.png)
 
 * json-sse: entrades amb estructures de tipus JSON, però en un format adequat per a ser un missatge enviat per servidors	
 
-![journalctl format json-sse](/img/journalctl-format-json-sse.png)
+![journalctl format json-sse](img/journalctl-format-json-sse.png)
 
 * cat: mostra només el missatge, sense cap altre tipus d'informació (com hora, host...)
 
-![journalctl format cat](/img/journalctl-format-cat.png)
+![journalctl format cat](img/journalctl-format-cat.png)
 
 ### MONITORITZACIÓ
 Per mostrar x número de logs, cal emprar la opció *-n* (**journalctl --lines=**), que 

@@ -112,11 +112,11 @@ En aquest cas, no s'ha trobat cap log del servei **slapd**, però si en comptes
 de buscar el servei slapd es busca per **LDAP**, si que mostra com s'encen 
 i s'atura el servidor:
 
-![Start i stop LDAP](/img/var.log.messages-slapd.png)
+![Start i stop LDAP](img/var.log.messages-slapd.png)
 
 També ens mostraria el log de si es produeix qualsevol error, però no la explicació d'aquest:
 
-![Error al iniciar LDAP](/img/failed-start-slapd.png)
+![Error al iniciar LDAP](img/failed-start-slapd.png)
 
 ## FILTRAR CAMP DONAT
 Com a administradors, potser interessaria veure el missatge generat per un 
@@ -125,7 +125,7 @@ altres eines, com el sed, awk o cut.
 Prenent com a model els logs generats al arrencar el sistema, donats per la 
 ordre **dmesg**, obtenim la següent resposta:
 
-![Missatges amb dmesg](/img/dmesg-humanredeable.png)
+![Missatges amb dmesg](img/dmesg-humanredeable.png)
 
 Si volem filtrar el camp del missatge, tenim diverses opcions per a realitzar-ho.
 
@@ -133,7 +133,7 @@ Per un costat, com el primer camp és de mida fixa, podriem emprar el sed, però
 no seria gaire còmode, ja que hauriem de contar la quantitat de caràcters que 
 volem descartar i després escriure'ls: **dmesg | sed 's/^..............//'**.
 
-![Filtrat dmesg camp del missatge](/img/dmesg-sed.png)
+![Filtrat dmesg camp del missatge](img/dmesg-sed.png)
 
 Una altre eina que disposem és la ordre **awk**, que permet mostrar el 
 camp que se li dóna. Per a mostrar aquest exemple, aquest cop s'utilitzaran 
@@ -142,13 +142,13 @@ ordre **dmesg**.
 
 Una mostra del contingut d'aquest fitxer de logs seria:
 
-![Exemple missatges /var/log/messages](/img/head-var.log.messages.png)
+![Exemple missatges /var/log/messages](img/head-var.log.messages.png)
 
 Si només volem veure els missatges, mitjançant la ordre awk podriem arribar 
 a visualitzar només la primera paraula de la descripció, i no seria el que 
 es vol aconseguir (tot i que s'apropa):
 
-![Missatges processats per awk](/img/awk-var.log.messages.png)
+![Missatges processats per awk](img/awk-var.log.messages.png)
 
 Finalment, vaig arribar a la conclusió que amb la eina de cut, si es pot 
 retallar la quantitat de camps desitjats, així que un cop seleccionat el 
@@ -156,7 +156,7 @@ camp de la descripció del log, se li podria passar per argument que mostri
 tota la informació des del punt mencionat fins al final del log, que equival 
 al final del missatge. La ordre a realitzar seria: **head -5 /var/log/messages | cut -d' ' -f7**
 
-![Missatges processats per cut](/img/cut-var.log.messages.png)
+![Missatges processats per cut](img/cut-var.log.messages.png)
 
 ## CONFIGURAR LOGGING MANUAL
 Syslog també permet ser configurar per tenir fitxers de logs per a un 
@@ -230,7 +230,7 @@ Si tornem a controlar el log que es produeix en el fitxer, ens donarà una
 extensa informació del que succeeix, ja què està mostrant **tots** els missatges 
 que genera el servei slapd.
 
-![Logs generats per slapd](/img/var.log.slapd.slapd.log-slapd.png)
+![Logs generats per slapd](img/var.log.slapd.slapd.log-slapd.png)
 
 
 
