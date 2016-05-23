@@ -110,36 +110,36 @@ Afegir a l'usuari al grup per a que pugui escriure i veure el directori:
 ## Comprovacions
 1. Es generen logs al directori
 
-	 [vimet@localhost ~]$ ll -h /var/log/journalcentral/
-	total 169M
-	-rw-r-----+ 1 systemd-journal-remote systemd-journal  16M 23 mai 10:29 remote-::ffff:10.250.1.68@5c844426cc374c54b7a8389876c7e514-0000000000000001-000529cbced2ef34.journal
-	-rw-r-----+ 1 systemd-journal-remote systemd-journal 8,0M 23 mai 10:29 remote-::ffff:10.250.1.68@5c844426cc374c54b7a8389876c7e514-0000000000001504-000529cbfca8f1c7.journal
+		 [vimet@localhost ~]$ ll -h /var/log/journalcentral/
+		total 169M
+		-rw-r-----+ 1 systemd-journal-remote systemd-journal  16M 23 mai 10:29 remote-::ffff:10.250.1.68@5c844426cc374c54b7a8389876c7e514-0000000000000001-000529cbced2ef34.journal
+		-rw-r-----+ 1 systemd-journal-remote systemd-journal 8,0M 23 mai 10:29 remote-::ffff:10.250.1.68@5c844426cc374c54b7a8389876c7e514-0000000000001504-000529cbfca8f1c7.journal
 
 2. Servei servidor
-	 [vimet@localhost ~]$ systemctl status systemd-journal-remote.service -l
-	  systemd-journal-remote.service - Journal Remote Sink Service
-	   Loaded: loaded (/usr/lib/systemd/system/systemd-journal-remote.service; indirect; vendor preset: disabled)
-	   Active: active (running) since dl 2016-05-23 10:29:29 CEST; 4min 48s ago
-	 Main PID: 2871 (systemd-journal)
-	   Status: "Processing requests..."
-	   CGroup: /system.slice/systemd-journal-remote.service
-			   └─2871 /usr/lib/systemd/systemd-journal-remote --listen-http=-3 --output=/var/log/journal/central/
+		 [vimet@localhost ~]$ systemctl status systemd-journal-remote.service -l
+		  systemd-journal-remote.service - Journal Remote Sink Service
+		   Loaded: loaded (/usr/lib/systemd/system/systemd-journal-remote.service; indirect; vendor preset: disabled)
+		   Active: active (running) since dl 2016-05-23 10:29:29 CEST; 4min 48s ago
+		 Main PID: 2871 (systemd-journal)
+		   Status: "Processing requests..."
+		   CGroup: /system.slice/systemd-journal-remote.service
+				   └─2871 /usr/lib/systemd/systemd-journal-remote --listen-http=-3 --output=/var/log/journal/central/
 
-	mai 23 10:29:29 localhost.localdomain systemd[1]: Started Journal Remote Sink Service.
-	mai 23 10:29:29 localhost.localdomain systemd[1]: Starting Journal Remote Sink Service...
+		mai 23 10:29:29 localhost.localdomain systemd[1]: Started Journal Remote Sink Service.
+		mai 23 10:29:29 localhost.localdomain systemd[1]: Starting Journal Remote Sink Service...
 
 3. Servei client
-	 [vimet@localhost ~]$ systemctl status systemd-journal-upload -l
-	  systemd-journal-upload.service - Journal Remote Upload Service
-	   Loaded: loaded (/usr/lib/systemd/system/systemd-journal-upload.service; enabled; vendor preset: disabled)
-	   Active: active (running) since dl 2016-05-23 10:29:48 CEST; 3min 52s ago
-	 Main PID: 3010 (systemd-journal)
-	   Status: "Processing input..."
-	   CGroup: /system.slice/systemd-journal-upload.service
-			   └─3010 /usr/lib/systemd/systemd-journal-upload --save-state
+		 [vimet@localhost ~]$ systemctl status systemd-journal-upload -l
+		  systemd-journal-upload.service - Journal Remote Upload Service
+		   Loaded: loaded (/usr/lib/systemd/system/systemd-journal-upload.service; enabled; vendor preset: disabled)
+		   Active: active (running) since dl 2016-05-23 10:29:48 CEST; 3min 52s ago
+		 Main PID: 3010 (systemd-journal)
+		   Status: "Processing input..."
+		   CGroup: /system.slice/systemd-journal-upload.service
+				   └─3010 /usr/lib/systemd/systemd-journal-upload --save-state
 
-	mai 23 10:29:48 localhost.localdomain systemd[1]: Started Journal Remote Upload Service.
-	mai 23 10:29:48 localhost.localdomain systemd[1]: Starting Journal Remote Upload Service...
+		mai 23 10:29:48 localhost.localdomain systemd[1]: Started Journal Remote Upload Service.
+		mai 23 10:29:48 localhost.localdomain systemd[1]: Starting Journal Remote Upload Service...
 
 
 
