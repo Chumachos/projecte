@@ -60,10 +60,6 @@ _HOSTNAME=
 _KERNEL_DEVICE= 
 
 	Nom del device del kernel
-	
-_UDEV_SYSNAME= 
-	
-	The kernel device name as it shows up in the device tree below /sys. 
 	  
 _UDEV_DEVNODE= 
 	
