@@ -109,9 +109,9 @@ al PC de classe es tracta de l'any-mes-dia.
 
 2. S'omple el fitxer de logs (mitjançant **systemctl restart slapd**)
 
-	[isx53866409@i04 slapd]$ ll -h
-	total 160K
-	-rw-r--r--. 1 root root 157K May 12 10:24 slapd.log
+		[isx53866409@i04 slapd]$ ll -h
+		total 160K
+		-rw-r--r--. 1 root root 157K May 12 10:24 slapd.log
 
 3. Es realitza la següent ordre, per rotar el fitxer slapd.log un cop ja 
 ha sobrepassat el limit establert configurat (100K). La ordre rotarà tots 
@@ -137,6 +137,7 @@ slapd creat per a que només faci la rotació d'aquest:
 	total 476K
 	-rw-r--r--. 1 root root 314K May 12 10:24 slapd.log
 	-rw-r--r--. 1 root root 157K May 12 10:24 slapd.log-20160512-1463041625
+
 Aquests passos si es tornen a realitzar crearien un nou fitxer rotat, i 
 hauria fins un màxim de 4 rotats (per la configuració que s'ha establert 
 en el fitxer) més el fitxer slapd.log.
