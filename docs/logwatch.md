@@ -79,7 +79,7 @@ ser la següent:
 
 		crontab -e
 
-		* * 1 * *./script-name
+		0 0 1 * *./script-name
 
 Els camps del cron són:
 * El primer camp: els minuts (0-59).
@@ -91,7 +91,7 @@ dissabte, el 7 seria diumenge de nou).
 
 Prenent aquestes explicacions dels camps del cron, l'exemple definit per a 
 executar el script equival a ser executat una vegada al mes, ja que està 
-configurat per a que s'executi el dia 1 del mes.
+configurat per a que s'executi el dia 1 del mes a les 00:00.
 
 	Date: Mon, 9 May 2016 12:46:03 +0200
 	From: logwatch@i04.informatica.escoladeltreball.org
