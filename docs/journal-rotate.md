@@ -1,6 +1,7 @@
 # ROTACIÓ AMB JOURNAL
 Permet la rotació dels fitxers de logs de journal que sobrepassen certs limits
-configurats, com ara el tamany o antiguitat que tenen.
+configurats, com ara el tamany o antiguitat que tenen. Tot i això, **journald
+automaticament rota els fitxers que sobrepassen certs limits**.
 
 El fitxer de configuració dels logs generats per journal es troba a 
 */etc/systemd/journald.conf*.
@@ -111,15 +112,17 @@ Les opcions amb prefix *System* s'aplica als fitxers quan estan en mode **persis
 		limits encara romandrien existents.
 	
 	* **SystemMaxFileSize, RuntimeMaxFileSize**: controla el tamany màxim individual
-	de cada fitxer de logs de journal. Els valors són K, M, G, T, P, E.
+	de cada fitxer de logs de journal. Els valors són K, M, G, T, P, E. Aquesta
+	opció es bona per exemple en el cas que estiguin activats els logs propis
+	de l'usuari, que podria generar molta informació i omplir el disc.
 
 * **MaxFileSec**: temps màxim que emmagatzemarà les entrades en single journal file
-abans de la rotació. Les opcions que pot prendre són: 0 (equival a que 
+abans de la **rotació**. Les opcions que pot prendre són: 0 (equival a que 
 sempre s'emmagatzemarà els fitxers, "*year*", "*month*", "*week*", "*day*", "*h*" o "*m*".
 
 * **MaxRetentionSec**: temps màxim que emmagatzemarà les entrades del journal. 
 Controla que si els fitxers de journal contenen entrades més antigues vers 
-el temps especificat seràn eliminats. Les opcions que pot prendre són: 0 (equival a que 
+el temps especificat seràn **eliminats**. Les opcions que pot prendre són: 0 (equival a que 
 sempre s'emmagatzemarà els fitxers, "*year*", "*month*", "*week*", "*day*", "*h*" o "*m*".
 
 * **SyncIntervalSec**: . Temps que ha de transcorrer abans de fer la sincronització
@@ -353,6 +356,26 @@ de logs dels usuaris:
 	-rwxr-xr-x+ 1 root systemd-journal 8.0M Apr 20 13:06 user-201942.journal
 	-rwxr-xr-x+ 1 root systemd-journal 8.0M Apr  4 14:01 user-201943.journal
 	-rwxr-xr-x+ 1 root systemd-journal 8.0M Nov 13  2015 user-202073.journal
+
+### Exemple 5: rotar fitxers cada x temps
+Es pot configurar journal per a que cada interval de temps que es desitgi
+es realitzi una rotació. Prenent la opció *MaxFileSec* se li entra com a opció
+el temps desitjat.
+
+Per exemple, si volem que a cada minut realitzi una rotació, fem el següent:
+
+	MaxFileSec=2m
+
+I fem un restart del servei: `systemctl restart systemd-journald`
+
+La rotació es farà en el moment en que hi hagi un nou log passats aquets
+dos minuts.
+
+	-rw-r-----+ 1 root systemd-journal 8.0M May 23 17:26 system@e186be3ef616483aa71b3012417c8736-00000000001d0e43-00053383eba30561.journal
+	-rw-r-----+ 1 root systemd-journal 8.0M May 23 17:28 system@e186be3ef616483aa71b3012417c8736-00000000001d0e64-0005338409c58ec6.journal
+	-rw-r-----+ 1 root systemd-journal 8.0M May 23 17:30 system@e186be3ef616483aa71b3012417c8736-00000000001d0e6b-000533840f3096f6.journal
+	-rw-r-----+ 1 root systemd-journal 8.0M May 23 17:32 system@e186be3ef616483aa71b3012417c8736-00000000001d0e9e-0005338413015941.journal
+	-rw-r-----+ 1 root systemd-journal 8.0M May 23 17:33 system.journal
 
 
 ## DIFERÈNCIA FITXERS DE ROTACIÓ VERS SYSLOG

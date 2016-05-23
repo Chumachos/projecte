@@ -6,10 +6,10 @@ recull i administra els logs rep el nom de **journal**.
 Aquest és implementat pel dimoni **journald**, que recull missatges de tot 
 tipus: kernel, initrd, serveis...
 
-Els fitxers de logs de journal estan en format binari, i han de ser processats
-per poder ser llegits. Aquest processat la fa la ordre `journalctl`. Aquesta
-ordre té una opció que permet mostrar els logs en diferents formats, que
-es presentaran en aquest tema.
+Els fitxers de logs de journal estan en format binari,a més d'estar indexats,
+i han de ser processats per poder ser llegits. Aquest processat la fa la ordre
+`journalctl`. Aquesta ordre té una opció que permet mostrar els logs en 
+diferents formats, que es presentaran en aquest tema.
 
 ## Característiques de journal
 Algunes de les característiques que ens aporta journal vers syslog són les segúents:
