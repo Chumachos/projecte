@@ -130,6 +130,7 @@ Afegir a l'usuari al grup per a que pugui escriure i veure el directori:
 		mai 23 10:29:29 localhost.localdomain systemd[1]: Starting Journal Remote Sink Service...
 
 3. Servei client
+
 		 [vimet@localhost ~]$ systemctl status systemd-journal-upload -l
 		  systemd-journal-upload.service - Journal Remote Upload Service
 		   Loaded: loaded (/usr/lib/systemd/system/systemd-journal-upload.service; enabled; vendor preset: disabled)
