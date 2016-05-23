@@ -33,8 +33,8 @@ estructura per a la informació, i així funciona journal. Les entrades de firmw
 són seguides per les del kernel, i les ultimes, les d'usuaris.
 
 
-## CAMPS
-### EXEMPLES CAMPS D'USUARIS (de clients)
+## EXEMPLES DE CAMPS CAMPS
+### CAMPS D'USUARIS (de clients)
 MESSAGE= 
 
 	Cadena de missatge que pot entendre una persona
@@ -49,6 +49,7 @@ _PID=, _UID=, _GID=
 	El proces, usuari, i ID del grup ID del procés.
 
 _COMM=, _EXE=, _CMDLINE= 
+
 	Nom del servei o path d'aquest del qual s'origina el procés.
 
 _HOSTNAME= 
@@ -57,71 +58,34 @@ _HOSTNAME=
 
 ### CAMPS DEL KERNEL
 _KERNEL_DEVICE= 
-	The kernel device name. If the entry is associated to a block device, the 
-	major and minor of the 	device node, separated by ":" and prefixed by "b". 
-	Similar for character devices but prefixed by "c". For network devices, this is the 
-	interface index prefixed by "n". For all other devices, this is the subsystem name 
-	prefixed by "+", followed by ":", followed by the kernel device name. 
 
-	_KERNEL_SUBSYSTEM= 
-	The kernel subsystem name. 
-  
+	Nom del device del kernel
+	
 	_UDEV_SYSNAME= 
+	
 	  The kernel device name as it shows up in the device tree below /sys. 
 	  
 	_UDEV_DEVNODE= 
-	  The device node path of this device in /dev. 
+	
+	  Node del path del device (/dev)-
 	  
-	_UDEV_DEVLINK= 
-	  Additional symlink names pointing to the device node in /dev. This field 
-	  is frequently set more than once per entry. 
 
 
 ### CAMPS EMPRATS PER PROGRAMES
-COREDUMP_UNIT=, COREDUMP_USER_UNIT= 
-	Used to annotate messages containing coredumps from system and session units. 
-	See systemd-coredumpctl(1). 
-	Priviledged programs (currently UID 0) may attach OBJECT_PID= to a message. 
-	This will instruct systemd-journald to attach additional fields on behalf of the caller: 
 OBJECT_PID=PID 
-	PID of the program that this message pertains to. 
 
-OBJECT_UID=, OBJECT_GID=, OBJECT_COMM=, OBJECT_EXE=, OBJECT_CMDLINE=, 
-OBJECT_AUDIT_SESSION=, OBJECT_AUDIT_LOGINUID=, OBJECT_SYSTEMD_CGROUP=, 
-OBJECT_SYSTEMD_SESSION=, OBJECT_SYSTEMD_OWNER_UID=, OBJECT_SYSTEMD_UNIT=, 
-OBJECT_SYSTEMD_USER_UNIT= 
-
-These are additional fields added automatically by systemd-journald. Their 
-meaning is the same as _UID=, _GID=, _COMM=, _EXE=, _CMDLINE=, _AUDIT_SESSION=, 
-_AUDIT_LOGINUID=, _SYSTEMD_CGROUP=, _SYSTEMD_SESSION=, _SYSTEMD_UNIT=, 
-_SYSTEMD_USER_UNIT=, and _SYSTEMD_OWNER_UID= as described above, except 
-that the process  identified by PID is described, instead of the process 
-which logged the message.
-
-### ADDRESS FIELDS
-During serialization into external formats, such as the Journal Export Format 
-or the Journal JSON Format, the addresses of journal entries are serialized into 
-fields prefixed with double underscores. Note that these are not proper fields 
-when stored in the journal but for addressing metadata of entries. They cannot be 
-written as part of structured log entries via calls such as sd_journal_send(3). 
-They may also not be used as matches for sd_journal_add_match(3) 
-
-__CURSOR= 
-	The cursor for the entry. A cursor is an opaque text string that uniquely 
-	describes the position of an entry in the journal and is portable across 
-	machines, platforms and journal files. 
+	PID del programa al qual pertany el missatge. 
 
 __REALTIME_TIMESTAMP= 
-	The wallclock time (CLOCK_REALTIME) at the point in time the entry was 
-	received by the journal, in microseconds since the epoch UTC, formatted 
-	as a decimal string. This has different properties from "_SOURCE_REALTIME_TIMESTAMP=", 
-	as it is usually a bit later but more likely to be monotonic. 
+
+	Temps en el qual journal ha rebut la entrada segons UTC, en un format
+	que mostra els microsegons
 
 __MONOTONIC_TIMESTAMP= 
-	The monotonic time (CLOCK_MONOTONIC) at the point in time the entry was 
-	received by the journal in microseconds, formatted as a decimal string. 
-	To be useful as an for the entry, this should be combined with with the 
-	boot ID in "_BOOT_ID=". 
+
+	Temps en format monotonic(CLOCK_MONOTONIC) que es mostrat segons en quin
+	moment journal ha rebut, en un format que mostra els microsegons.
+	Pot ser combinat amb "_BOOT_ID=". 
 
 
 ## MANIPULAR SYSTEMD AMB JOURNAL
