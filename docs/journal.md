@@ -33,7 +33,7 @@ estructura per a la informació, i així funciona journal. Les entrades de firmw
 són seguides per les del kernel, i les ultimes, les d'usuaris.
 
 
-## EXEMPLES DE CAMPS CAMPS
+## EXEMPLES DE CAMPS
 ### CAMPS D'USUARIS (de clients)
 MESSAGE= 
 
