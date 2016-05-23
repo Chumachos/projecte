@@ -313,7 +313,24 @@ no seràn.
 Per a mostrar-ho, tenim la següent llista de fitxers de logs al directori
 */var/log/journal/*:
 
-![Imatge de logs sense filtre](img/all.logs.var.log.journal.png)
+	-rwxr-xr-x+ 1 root systemd-journal  24M May 17 12:37 system@000533075316d792-cd8f232c331d26d1.journal
+	-rwxr-xr-x+ 1 root systemd-journal  40M Oct 19 2015 system@6d3ae48948e9408289fdeda8a019bad4-0000000000000001-00051fd9f259b6aa.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Oct 19 2015 system@6d3ae48948e9408289fdeda8a019bad4-000000000000b8d3-0005226fe102e931.journal
+	-rwxr-xr-x+ 1 root systemd-journal  16M Oct 27 2015 system@6d3ae48948e9408289fdeda8a019bad4-000000000000b9ae-0005226fe133d9ec.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Nov  2 2015 system@6d3ae48948e9408289fdeda8a019bad4-000000000000e214-000523123be38882.journal
+	-rwxr-xr-x+ 1 root systemd-journal  32M Jan 11 09:27 system@6d3ae48948e9408289fdeda8a019bad4-00000000000f384-0005238a3e1ff2c4.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Jan 11 09:27 system@6d3ae48948e9408289fdeda8a019bad4-000000000018632-0005290ab4f85fff.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Jan 11 09:27 system@6d3ae48948e9408289fdeda8a019bad4-000000000018776-0005290ab5b84eba.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Apr 19 09:01 system@6d3ae48948e9408289fdeda8a019bad4-000000000001896-0005290ab7f37b1b.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M May 17 12:52 system.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Sep 16  2015 user-201930.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Dec 15 14:00 user-201931.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Feb  4 13:06 user-201933.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Apr  5 10:46 user-201936.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Apr  8 10:52 user-201940.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Apr 20 13:06 user-201942.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Apr  4 14:01 user-201943.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Nov 13  2015 user-202073.journal
 
 S'estableix la opció de filtre per a que elimini aquells que sobrepassin
 el mes de distància:
@@ -325,7 +342,18 @@ de journal, es podrà comprovar que aquells **logs del sistema** que la seva
 data és superior a un mes, hauran desaparegut, a excepció dels fitxers
 de logs dels usuaris:
 
-![Logs filtrats amb 1 mes](img/filtre.logs.var.log.journal.png)
+	-rwxr-xr-x+ 1 root systemd-journal  24M May 17 12:37 system@000533075316d792-cd8f232c331d26d1.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Apr 19 09:01 system@6d3ae48948e9408289fdeda8a019bad4-000000000001896-0005290ab7f37b1b.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M May 17 12:52 system.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Sep 16  2015 user-201930.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Dec 15 14:00 user-201931.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Feb  4 13:06 user-201933.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Apr  5 10:46 user-201936.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Apr  8 10:52 user-201940.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Apr 20 13:06 user-201942.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Apr  4 14:01 user-201943.journal
+	-rwxr-xr-x+ 1 root systemd-journal 8.0M Nov 13  2015 user-202073.journal
+
 
 ## DIFERÈNCIA FITXERS DE ROTACIÓ VERS SYSLOG
 Els fitxers de rotació de journal vers el de syslog es diferencien principalment
