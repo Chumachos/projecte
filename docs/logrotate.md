@@ -126,17 +126,17 @@ slapd creat per a que només faci la rotació d'aquest:
 4. Es torna a comprovar que realment s'ha rotat el fitxer, i tornem a afegir-hi dades 
 (**systemctl restart slapd** x2)
 
-	[isx53866409@i04 slapd]$ ll -h
-	total 160K
-	-rw-r--r--. 1 root root    0 May 12 10:24 slapd.log
-	-rw-r--r--. 1 root root 157K May 12 10:24 slapd.log-20160512-1463041625
+		[isx53866409@i04 slapd]$ ll -h
+		total 160K
+		-rw-r--r--. 1 root root    0 May 12 10:24 slapd.log
+		-rw-r--r--. 1 root root 157K May 12 10:24 slapd.log-20160512-1463041625
 
-	[isx53866409@i04 slapd]$ sudo systemctl restart slapd
-	[isx53866409@i04 slapd]$ sudo systemctl restart slapd
-	[isx53866409@i04 slapd]$ ll -h
-	total 476K
-	-rw-r--r--. 1 root root 314K May 12 10:24 slapd.log
-	-rw-r--r--. 1 root root 157K May 12 10:24 slapd.log-20160512-1463041625
+		[isx53866409@i04 slapd]$ sudo systemctl restart slapd
+		[isx53866409@i04 slapd]$ sudo systemctl restart slapd
+		[isx53866409@i04 slapd]$ ll -h
+		total 476K
+		-rw-r--r--. 1 root root 314K May 12 10:24 slapd.log
+		-rw-r--r--. 1 root root 157K May 12 10:24 slapd.log-20160512-1463041625
 
 Aquests passos si es tornen a realitzar crearien un nou fitxer rotat, i 
 hauria fins un màxim de 4 rotats (per la configuració que s'ha establert 
