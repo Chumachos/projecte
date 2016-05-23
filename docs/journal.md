@@ -368,43 +368,6 @@ mostrant una linia per cada entrada.
 		Startup finished in 7ms.
 
 
-### MONITORITZACIÓ
-Per mostrar x número de logs, cal emprar la opció *-n* (**journalctl --lines=**), que 
-seria equivalen a *tail -n* (*tail --lines=*). Per defecte, mostra les 10 darreres entrades, és 
-a dir, les més recents. També es podria especificar un número després de *-n*, 
-per veure *y* nombre d'entrades.
-
-Per a visualitzar de manera continua els logs, la opció eś *-f* (**journalctl --follow**), 
-equivalent a tail *-f* (*tail --follow*).
-
-### MANTENIMENT DE JOURNAL
-La ordre per comprovar la quantitat d'espai en disc que el journal està ocupant 
-es realitza de la següent manera:
-
-	journalctl --disk-usage
-
-#### Limitació dels logs
-Si es vol limitar el l'espai del journal emprat per part dels logs es pot 
-configurar desde l'arxiu de configuració situat a */etc/systemd/journald.conf*. 
-En el fitxer trobem diferents opcions que poden ser configurades relacionades 
-amb el tema d'ús de disc:
-
-* SystemMaxUse: s'especifica la quantitat màxima d'espai que el journal pot 
-emmagatzemar en el disc.
-
-* SystemKeepFree: tamany d'espai en disc mínim que journal ha de deixar 
-lliure encara que hagi d'emmagatzemar els logs
-
-* SystemMaxFileSize: determina la mida màxima dels fitxers rotats del journal.
-
-* RuntimeMaxUse: tamany màxim que es pot utilitzar en un directori volatil (com /run)
-
-* RuntimeKeepFree: controla l'espai que journal ha de deixar lliure
-	com a mínim per a altres usos.
-
-* RuntimeMaxFileSize: especifica el tamany màxim d'un arxiu del journal a 
-/run abans de ser rotat.
-
 
 
 
