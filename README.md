@@ -37,6 +37,8 @@ Tots els documents han estat revisats i estudiats per mi mateix i contenen infor
 
 [Centralització de logs - Syslog](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux_OpenStack_Platform/3/html/Installation_and_Configuration_Guide/Configuring_the_rsyslog_Server.html)
 
+[Centralització de logs - Systemd](http://serverfault.com/questions/758244/how-to-configure-systemd-journal-remote)
+
 JournalWatch (info per interès, no aplicada a la redacció del projecte)
 
 * [JournalWatch (semblant a logwatch)](https://bbs.archlinux.org/viewtopic.php?id=184105)
@@ -44,4 +46,4 @@ JournalWatch (info per interès, no aplicada a la redacció del projecte)
 * [JournalWatch (GitHub)](https://github.com/The-Compiler/journalwatch)
 
 
-*Darrera actualització 2016-05-22_20:42*
+*Darrera actualització 2016-05-23_10:16*
