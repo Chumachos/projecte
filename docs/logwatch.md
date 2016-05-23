@@ -77,7 +77,7 @@ Ara només caldria configurar el crontab per tal de que es generi un informe
 cada x temps que l'administrador desitgi. La configuració del cron podria 
 ser la següent:
 
-		**crontab -e**
+		crontab -e
 
 		* * 1 * *./script-name
 
