@@ -64,7 +64,7 @@ Canviar els permissos per a que pugui emmagatzemar-los:
 
 	chown systemd-journal-remote /var/log/journal/central
 
-Reiniciarel servei després de configurar tot:
+Reiniciar el servei després de configurar tot:
 
 	systemctl restart systemd-journal-remote
 
@@ -99,7 +99,8 @@ no funciona:
 
 Una solució, tot i que incorrecte, seria la de canviar els permisos al directori
 i permetre que qualsevol tingui accés. Per tant es realitzarà la ordre
-`chmod 777 /var/lib/systemd/journal-upload`.
+`chmod 777 /var/lib/systemd/journal-upload`. Es torna a realitzar les dues ordres
+anteriors i ja tindriem el client preparat per a enviar logs.
 
 Afegir a l'usuari al grup per a que pugui escriure i veure el directori:
 
@@ -114,7 +115,6 @@ Afegir a l'usuari al grup per a que pugui escriure i veure el directori:
 	-rw-r-----+ 1 systemd-journal-remote systemd-journal  16M 23 mai 10:29 remote-::ffff:10.250.1.68@5c844426cc374c54b7a8389876c7e514-0000000000000001-000529cbced2ef34.journal
 	-rw-r-----+ 1 systemd-journal-remote systemd-journal 8,0M 23 mai 10:29 remote-::ffff:10.250.1.68@5c844426cc374c54b7a8389876c7e514-0000000000001504-000529cbfca8f1c7.journal
 
-
 2. Servei servidor
 	 [vimet@localhost ~]$ systemctl status systemd-journal-remote.service -l
 	  systemd-journal-remote.service - Journal Remote Sink Service
@@ -127,8 +127,6 @@ Afegir a l'usuari al grup per a que pugui escriure i veure el directori:
 
 	mai 23 10:29:29 localhost.localdomain systemd[1]: Started Journal Remote Sink Service.
 	mai 23 10:29:29 localhost.localdomain systemd[1]: Starting Journal Remote Sink Service...
-
-
 
 3. Servei client
 	 [vimet@localhost ~]$ systemctl status systemd-journal-upload -l
