@@ -112,11 +112,17 @@ En aquest cas, no s'ha trobat cap log del servei **slapd**, però si en comptes
 de buscar el servei slapd es busca per **LDAP**, si que mostra com s'encen 
 i s'atura el servidor:
 
-![Start i stop LDAP](img/var.log.messages-slapd.png)
+	[isx53866409@i04 ~]$ sudo cat /var/log/messages | grep 'LDAP'
+	May 23 13:01:49 i04 systemd: Starting OpenLDAP Server Daemon...
+	May 23 13:01:49 i04 systemd: Started OpenLDAP Server Daemon.
+
 
 També ens mostraria el log de si es produeix qualsevol error, però no la explicació d'aquest:
 
-![Error al iniciar LDAP](img/failed-start-slapd.png)
+	[isx53866409@i04 ~]$ sudo cat /var/log/messages | grep 'LDAP'
+	May 23 13:02:34 i04 systemd: Starting OpenLDAP Server Daemon...
+	May 23 13:02:34 i04 systemd: Failed to start OpenLDAP Server Daemon.
+
 
 ## FILTRAR CAMP DONAT
 Com a administradors, potser interessaria veure el missatge generat per un 
@@ -125,7 +131,11 @@ altres eines, com el sed, awk o cut.
 Prenent com a model els logs generats al arrencar el sistema, donats per la 
 ordre **dmesg**, obtenim la següent resposta:
 
-![Missatges amb dmesg](img/dmesg-humanredeable.png)
+	[isx53866409@i04 ~]$ dmesg
+	[May23 08:58] Initializing cgroup subsys cpuset
+	[  +0.000000] Initializing cgroup subsys cpu
+	[  +0.000000] Initializing cgroup subsys cpuacct
+
 
 Si volem filtrar el camp del missatge, tenim diverses opcions per a realitzar-ho.
 
@@ -133,7 +143,10 @@ Per un costat, com el primer camp és de mida fixa, podriem emprar el sed, però
 no seria gaire còmode, ja que hauriem de contar la quantitat de caràcters que 
 volem descartar i després escriure'ls: **dmesg | sed 's/^..............//'**.
 
-![Filtrat dmesg camp del missatge](img/dmesg-sed.png)
+	[isx53866409@i04 ~]$ dmesg | sed 's/^..............//'
+	 Initializing cgroup subsys cpuset
+	 Initializing cgroup subsys cpu
+	 Initializing cgroup subsys cpuacct
 
 Una altre eina que disposem és la ordre **awk**, que permet mostrar el 
 camp que se li dóna. Per a mostrar aquest exemple, aquest cop s'utilitzaran 
@@ -142,13 +155,23 @@ ordre **dmesg**.
 
 Una mostra del contingut d'aquest fitxer de logs seria:
 
-![Exemple missatges /var/log/messages](img/head-var.log.messages.png)
+	[isx53866409@i04 ~]$ sudo head -5 /var/log/messages
+	May 23 09:39:05 i04 rsyslogd: [origin software="rsyslogd" swVersion="7.4.8" x-pid="493" x-info="http://www.rsyslog.com"] rsyslogd was HUPed
+	May 23 09:40:12 i04 systemd: Job dev-disk-by\x2duuid-73c63776\x2d7177\x2d4fcd\x2dbfaa\x2d611f42a85320.device/start timed out.
+	May 23 09:40:12 i04 systemd: Timed out waiting for device dev-disk-by\x2duuid-73c63776\x2d7177\x2d4fcd\x2dbfaa\x2d611f42a85320.device.
+	May 23 09:40:12 i04 systemd: Dependency failed for /dev/disk/by-uuid/73c63776-7177-4fcd-bfaa-611f42a85320.
+	May 23 09:40:12 i04 systemd:
 
 Si només volem veure els missatges, mitjançant la ordre awk podriem arribar 
 a visualitzar només la primera paraula de la descripció, i no seria el que 
 es vol aconseguir (tot i que s'apropa):
 
-![Missatges processats per awk](img/awk-var.log.messages.png)
+	[isx53866409@i04 ~]$ sudo head -4 /var/log/messages | awk '{print $6}'
+	[origin
+	Job
+	Timed
+	Dependency
+
 
 Finalment, vaig arribar a la conclusió que amb la eina de cut, si es pot 
 retallar la quantitat de camps desitjats, així que un cop seleccionat el 
@@ -156,7 +179,12 @@ camp de la descripció del log, se li podria passar per argument que mostri
 tota la informació des del punt mencionat fins al final del log, que equival 
 al final del missatge. La ordre a realitzar seria: **head -5 /var/log/messages | cut -d' ' -f7**
 
-![Missatges processats per cut](img/cut-var.log.messages.png)
+	[isx53866409@i04 ~]$ sudo head -4 /var/log/messages | cut -d' ' -f7-
+	software="rsyslogd" swVersion="7.4.8" x-pid="493" x-info="http://www.rsyslog.com"] rsyslogd was HUPed
+	dev-disk-by\x2duuid-73c63776\x2d7177\x2d4fcd\x2dbfaa\x2d611f42a85320.device/start timed out.
+	out waiting for device dev-disk-by\x2duuid-73c63776\x2d7177\x2d4fcd\x2dbfaa\x2d611f42a85320.device.
+	failed for /dev/disk/by-uuid/73c63776-7177-4fcd-bfaa-611f42a85320.
+
 
 ## CONFIGURAR LOGGING MANUAL
 Syslog també permet ser configurar per tenir fitxers de logs per a un 
@@ -230,7 +258,18 @@ Si tornem a controlar el log que es produeix en el fitxer, ens donarà una
 extensa informació del que succeeix, ja què està mostrant **tots** els missatges 
 que genera el servei slapd.
 
-![Logs generats per slapd](img/var.log.slapd.slapd.log-slapd.png)
+	[isx53866409@i04 ~]$ sudo tail -f /var/log/slapd/slapd.log | grep slapd
+	May 23 13:02:34 i04 slapd[5802]: 
+	May 23 13:02:34 i04 slapd[5802]: daemon: epoll: listen=7 active_threads=0 tvp=NULL
+	May 23 13:02:34 i04 slapd[5802]: daemon: epoll: listen=8 active_threads=0 tvp=NULL
+	May 23 13:02:34 i04 slapd[5802]: daemon: epoll: listen=9 active_threads=0 tvp=NULL
+	May 23 13:02:34 i04 slapd[5802]: daemon: shutdown requested and initiated.
+	May 23 13:02:34 i04 slapd[5802]: daemon: closing 7
+	May 23 13:02:34 i04 slapd[5802]: daemon: closing 8
+	May 23 13:02:34 i04 slapd[5802]: daemon: closing 9
+	May 23 13:02:34 i04 slapd[5802]: slapd shutdown: waiting for 0 operations/tasks to finish
+	May 23 13:02:34 i04 slapd[5802]: slapd shutdown: initiated
+
 
 
 
