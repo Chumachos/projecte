@@ -116,6 +116,7 @@ Afegir a l'usuari al grup per a que pugui escriure i veure el directori:
 		-rw-r-----+ 1 systemd-journal-remote systemd-journal 8,0M 23 mai 10:29 remote-::ffff:10.250.1.68@5c844426cc374c54b7a8389876c7e514-0000000000001504-000529cbfca8f1c7.journal
 
 2. Servei servidor
+
 		 [vimet@localhost ~]$ systemctl status systemd-journal-remote.service -l
 		  systemd-journal-remote.service - Journal Remote Sink Service
 		   Loaded: loaded (/usr/lib/systemd/system/systemd-journal-remote.service; indirect; vendor preset: disabled)
