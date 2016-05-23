@@ -136,13 +136,17 @@ Exemple pràctic: Visualització dels logs en els darrers 5min.
 
 1. Es mostrarà que no hi ha cap log:
 
-![Exemple que no hi ha logs en x min](img/no-logs-time.png)
+	[isx53866409@i04 scripts]$ journalctl --since "2016-05-06 12:35:00" --until "2016-05-06 12:40:00"
+	-- Logs begin at Wed 2015-09-16 11:01:36 CEST, end at Fri 2016-05-06 12:26:50 CEST. --
 
 2. Encenem servei slapd, per a que generi logs: **systemctl start slapd**
 
 3. Tornem a comprovar els logs en el mateix interval de temps que abans.
 
-![Exemple logs en x minuts](img/logs-time.png)
+	[isx53866409@i04 scripts]$ journalctl --since "2016-05-06 12:35:00" --until "2016-05-06 12:40:00"
+	-- Logs begin at Wed 2015-09-16 11:01:36 CEST, end at Fri 2016-05-06 12:26:50 CEST. --
+	May 06 12:39:20 i04.informatica.escoladeltreball.org systemd[1]: Started OpenLDAP Server Daemon.
+
 
 ### FILTRAR PER PROCES, USUARI O GRUPID
 Donat un determinat servei, pot tenir diversos processos fills. Si es vol 
@@ -196,7 +200,10 @@ nivel de prioritat i, a més a més, les que pertanyin a un nivell per sobre
 (més importants). Per exemple, si seleccionem el nivell d'alerta 2, mostrarà 
 els logs de crit (2), alert (1) i emerg (0).
 
-![Exemple prioritat seleccionada](img/uniq-priority-journal.png)
+	[isx53866409@i04 scripts]$ journalctl --priority 3 --output=json-pretty | grep PRIORITY | sort | uniq
+		"PRIORITY" : "1",
+		"PRIORITY" : "2",
+		"PRIORITY" : "3",
 
 ### TOT JOURNAL OUTPUT
 Per defecte, la ordre journalctl mostra només una pàgina de la sortida per 
@@ -212,45 +219,154 @@ cal emprar la opció *-o* (*--output=*). Els diferents tipus d'opcions són:
 * short : és el format per defecte més semblant als arxius de syslog, 
 mostrant una linia per cada entrada.
 
-![journalctl format short](img/journalctl-format-short.png)
+		[isx53866409@i04 scripts]$ journalctl --output=short
+		Sep 16 11:47:50 i04.informatica.escoladeltreball.org systemd[1004]: Starting Default.
+		Sep 16 11:47:50 i04.informatica.escoladeltreball.org systemd[1004]: Reached target Default.
+		Sep 16 11:47:50 i04.informatica.escoladeltreball.org systemd[1004]: Startup finished in 7ms.
 
 * short-iso : similar a short, però horari segons 8601
 
-![journalctl format short-iso](img/journalctl-format-short-iso.png)
+		[isx53866409@i04 scripts]$ journalctl --output=short-iso
+		2015-09-16T11:47:50+0200 i04.informatica.escoladeltreball.org systemd[1004]: Starting Default.
+		2015-09-16T11:47:50+0200 i04.informatica.escoladeltreball.org systemd[1004]: Reached target Default.
+		2015-09-16T11:47:50+0200 i04.informatica.escoladeltreball.org systemd[1004]: Startup finished in 7ms.
+
 
 * short-precise : similar a short, però mostrant el temps amb microsegons inclosos.
 
-![journalctl format short-precise](img/journalctl-format-short-precise.png)
+		[isx53866409@i04 scripts]$ journalctl --output=short-precise
+		Sep 16 11:47:50.455787 i04.informatica.escoladeltreball.org systemd[1004]: Starting Default.
+		Sep 16 11:47:50.455796 i04.informatica.escoladeltreball.org systemd[1004]: Reached target Default.
+		Sep 16 11:47:50.455809 i04.informatica.escoladeltreball.org systemd[1004]: Startup finished in 7ms.
 
 * short-monotonic : mostra el temps en format monotonic.
 
-![journalctl format short-monotonic](img/journalctl-format-short-monotonic.png)
+		[isx53866409@i04 scripts]$ journalctl --output=short-monotonic
+		[   29.363509] i04.informatica.escoladeltreball.org systemd[1004]: Starting Default.
+		[   29.363676] i04.informatica.escoladeltreball.org systemd[1004]: Reached target Default.
+		[   29.363824] i04.informatica.escoladeltreball.org systemd[1004]: Startup finished in 7ms.
 
 * verbose: mostra mitjançant camps estructurats tota la informació del log.
 
-![journalctl format verbose](img/journalctl-format-verbose.png)
+		[isx53866409@i04 scripts]$ journalctl --output=verbose
+		Wed 2015-09-16 11:47:50.449335 CEST [s=438c332ec89a44e7a03b82849e5c4101;i=1d8f;b=a6bd3cfac4094b1abd8939580214d025;m=1c00a55;t=51fda311829a1;x=847eed9058620800]
+			PRIORITY=4
+			SYSLOG_FACILITY=3
+			CODE_FILE=../src/core/dbus.c
+			CODE_LINE=971
+			CODE_FUNCTION=manager_bus_connect_private
+			SYSLOG_IDENTIFIER=systemd
+			MESSAGE=Failed to open private bus connection: Failed to connect to socket /run/user/201930/dbus/user_bus_socket: No such file or directory
+			_TRANSPORT=journal
+			_PID=1004
+			_UID=201930
+			_GID=200012
+			_COMM=systemd
+			_EXE=/usr/lib/systemd/systemd
+			_CMDLINE=/usr/lib/systemd/systemd --user
+			_CAP_EFFECTIVE=0
+			_SYSTEMD_CGROUP=/user.slice/user-201930.slice/user@201930.service
+			_SYSTEMD_OWNER_UID=201930
+			_SYSTEMD_UNIT=user@201930.service
+			_SYSTEMD_SLICE=user-201930.slice
+			_SELINUX_CONTEXT=system_u:system_r:init_t:s0
+			_SOURCE_REALTIME_TIMESTAMP=1442396870449335
+			_BOOT_ID=a6bd3cfac4094b1abd8939580214d025
+			_MACHINE_ID=11c4ccf99e5e4d148e51b0394ec4d780
+			_HOSTNAME=i04.informatica.escoladeltreball.org
 
 * export: exporta journal en format binari per a poder enviar-lo per xarxa. També serveix per a backups
 
-![journalctl format export](img/journalctl-format-export.png)
+		[isx53866409@i04 scripts]$ journalctl --output=export
+		__CURSOR=s=438c332ec89a44e7a03b82849e5c4101;i=1d8f;b=a6bd3cfac4094b1abd8939580214d025;m=1c00a55;t=51fda311829a1;x=847eed9058620800
+		__REALTIME_TIMESTAMP=1442396870551969
+		__MONOTONIC_TIMESTAMP=29362773
+		_BOOT_ID=a6bd3cfac4094b1abd8939580214d025
+		PRIORITY=4
+		SYSLOG_FACILITY=3
+		CODE_FILE=../src/core/dbus.c
+		CODE_LINE=971
+		CODE_FUNCTION=manager_bus_connect_private
+		SYSLOG_IDENTIFIER=systemd
+		MESSAGE=Failed to open private bus connection: Failed to connect to socket /run/user/201930/dbus/user_bus_socket: No such file or directory
+		_TRANSPORT=journal
+		_PID=1004
+		_UID=201930
+		_GID=200012
+		_COMM=systemd
+		_EXE=/usr/lib/systemd/systemd
+		_CMDLINE=/usr/lib/systemd/systemd --user
+		_CAP_EFFECTIVE=0
+		_SYSTEMD_CGROUP=/user.slice/user-201930.slice/user@201930.service
+		_SYSTEMD_OWNER_UID=201930
+		_SYSTEMD_UNIT=user@201930.service
+		_SYSTEMD_SLICE=user-201930.slice
+		_SELINUX_CONTEXT=system_u:system_r:init_t:s0
+		_SOURCE_REALTIME_TIMESTAMP=1442396870449335
+		_MACHINE_ID=11c4ccf99e5e4d148e51b0394ec4d780
+		_HOSTNAME=i04.informatica.escoladeltreball.org
+
 
 * json: entrades amb estructures de tipus JSON
 
-![journalctl format json](img/journalctl-format-json.png)
+		[isx53866409@i04 scripts]$ journalctl --output=json
+		{ "__CURSOR" : "s=438c332ec89a44e7a03b82849e5c4101;i=1d8f;b=a6bd3cfac4094b1abd8939580214d025;m=1c00a55;t=51fda311829a1;x=847eed9058620800", "__REALTIME_TIMESTAMP" : "144239687055
+		{ "__CURSOR" : "s=438c332ec89a44e7a03b82849e5c4101;i=1d90;b=a6bd3cfac4094b1abd8939580214d025;m=1c00d35;t=51fda31182c81;x=3f24be45b6d727f0", "__REALTIME_TIMESTAMP" : "144239687055
+		{ "__CURSOR" : "s=438c332ec89a44e7a03b82849e5c4101;i=1d91;b=a6bd3cfac4094b1abd8939580214d025;m=1c00ddc;t=51fda31182d27;x=1a6743953ffffd6b", "__REALTIME_TIMESTAMP" : "144239687055
+
 
 * json-pretty: entrades amb estructures de tipus JSON, però el format és de múltiples linies per cada entrada, permetent que sigui més llegible.
 
-![journalctl format json-pretty](img/journalctl-format-json-pretty1.png)
+		[isx53866409@i04 scripts]$ journalctl --output=json-pretty
+		{
+				"__CURSOR" : "s=438c332ec89a44e7a03b82849e5c4101;i=1d8f;b=a6bd3cfac4094b1abd8939580214d025;m=1c00a55;t=51fda311829a1;x=847eed9058620800",
+				"__REALTIME_TIMESTAMP" : "1442396870551969",
+				"__MONOTONIC_TIMESTAMP" : "29362773",
+				"_BOOT_ID" : "a6bd3cfac4094b1abd8939580214d025",
+				"PRIORITY" : "4",
+				"SYSLOG_FACILITY" : "3",
+				"CODE_FILE" : "../src/core/dbus.c",
+				"CODE_LINE" : "971",
+				"CODE_FUNCTION" : "manager_bus_connect_private",
+				"SYSLOG_IDENTIFIER" : "systemd",
+				"MESSAGE" : "Failed to open private bus connection: Failed to connect to socket /run/user/201930/dbus/user_bus_socket: No such file or directory",
+				"_TRANSPORT" : "journal",
+				"_PID" : "1004",
+				"_UID" : "201930",
+				"_GID" : "200012",
+				"_COMM" : "systemd",
+				"_EXE" : "/usr/lib/systemd/systemd",
+				"_CMDLINE" : "/usr/lib/systemd/systemd --user",
+				"_CAP_EFFECTIVE" : "0",
+				"_SYSTEMD_CGROUP" : "/user.slice/user-201930.slice/user@201930.service",
+				"_SYSTEMD_OWNER_UID" : "201930",
+				"_SYSTEMD_UNIT" : "user@201930.service",
+				"_SYSTEMD_SLICE" : "user-201930.slice",
+				"_SELINUX_CONTEXT" : "system_u:system_r:init_t:s0",
+				"_SOURCE_REALTIME_TIMESTAMP" : "1442396870449335",
+				"_MACHINE_ID" : "11c4ccf99e5e4d148e51b0394ec4d780",
+				"_HOSTNAME" : "i04.informatica.escoladeltreball.org"
+		}
 
-![journalctl format json-pretty](img/journalctl-format-json-pretty2.png)
 
 * json-sse: entrades amb estructures de tipus JSON, però en un format adequat per a ser un missatge enviat per servidors	
 
-![journalctl format json-sse](img/journalctl-format-json-sse.png)
+		[isx53866409@i04 scripts]$ journalctl --output=json-sse
+		data: { "__CURSOR" : "s=438c332ec89a44e7a03b82849e5c4101;i=1d8f;b=a6bd3cfac4094b1abd8939580214d025;m=1c00a55;t=51fda311829a1;x=847eed9058620800", "__REALTIME_TIMESTAMP" : "144239
+
+		data: { "__CURSOR" : "s=438c332ec89a44e7a03b82849e5c4101;i=1d90;b=a6bd3cfac4094b1abd8939580214d025;m=1c00d35;t=51fda31182c81;x=3f24be45b6d727f0", "__REALTIME_TIMESTAMP" : "144239
+
+		data: { "__CURSOR" : "s=438c332ec89a44e7a03b82849e5c4101;i=1d91;b=a6bd3cfac4094b1abd8939580214d025;m=1c00ddc;t=51fda31182d27;x=1a6743953ffffd6b", "__REALTIME_TIMESTAMP" : "144239
+
 
 * cat: mostra només el missatge, sense cap altre tipus d'informació (com hora, host...)
 
-![journalctl format cat](img/journalctl-format-cat.png)
+		[isx53866409@i04 scripts]$ journalctl --output=cat
+		Failed to open private bus connection: Failed to connect to socket /run/user/201930/dbus/user_bus_socket: No such file or directory
+		Starting Default.
+		Reached target Default.
+		Startup finished in 7ms.
+
 
 ### MONITORITZACIÓ
 Per mostrar x número de logs, cal emprar la opció *-n* (**journalctl --lines=**), que 
