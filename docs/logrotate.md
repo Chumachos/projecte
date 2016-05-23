@@ -12,14 +12,57 @@ opció `--force`.
 
 ## FITXERS DE CONFIGURACIÓ
 **/usr/sbin/logrotate** – la ordre de logrotate
+
 **/etc/cron.daily/logrotate** – script de shell que logrotate executa cada dia
 
-![Script logrotate](img/etc.cron.daily.logrotate.png)
+	#!/bin/sh
+
+	/usr/sbin/logrotate /etc/logrotate.conf
+	EXITVALUE=$?
+	if [ $EXITVALUE != 0 ]; then
+		/usr/bin/logger -t logrotate "ALERT exited abnormally with [$EXITVALUE]"
+	fi
+	exit 0
 
 **/etc/logrotate.conf** – configuració de rotació per a tots aquells arxius 
 de logs que s'especifiquin en el fitxer
 
-![Configuració logrotate.conf](img/etc.logrotate.conf.png)
+	# see "man logrotate" for details
+	# rotate log files weekly
+	weekly
+
+	# keep 4 weeks worth of backlogs
+	rotate 4
+
+	# create new (empty) log files after rotating old ones
+	create
+
+	# use date as a suffix of the rotated file
+	dateext
+
+	# uncomment this if you want your log files compressed
+	#compress
+
+	# RPM packages drop log rotation information into this directory
+	include /etc/logrotate.d
+
+	# no packages own wtmp and btmp -- we'll rotate them here
+	/var/log/wtmp {
+		monthly
+		create 0664 root utmp
+			minsize 1M
+		rotate 1
+	}
+
+	/var/log/btmp {
+		missingok
+		monthly
+		create 0600 root utmp
+		rotate 1
+	}
+
+	# system-specific logs may be also be configured here.
+
 
 **/etc/logrotate.d** - configuracions de rotació de logs de packets individuals
  instal·lats al sistema. Per exemple httpd o el packet yum.
@@ -30,7 +73,15 @@ com va ser el cas de **slapd**, ara es configurarà la rotació per als fitxers 
 
 1. Creem la configuració per a slapd al fitxer */etc/logrotate.d/slapd*
 
-	![Exemple configuració fitxer rotació slapd](img/example.etc.logrotate.d.slapd.png)
+		/var/log/slapd/slapd.log {
+		size 100K
+		create 0644 root root
+		rotate 4
+		copytruncate
+		dateext
+		dateformat -%Y%m%d-%s
+		}
+
 
 * size: permetrà la rotació en el moment en que el fitxer slapd.log sigui igual 
 o major al tamany especificat. Els diferents tamanys que es poden especificar són:
@@ -58,9 +109,9 @@ al PC de classe es tracta de l'any-mes-dia.
 
 2. S'omple el fitxer de logs (mitjançant **systemctl restart slapd**)
 
-	![Log de slapd buit](img/var.log.slapd.with-logs.png)
-
-	![Log de slapd amb missatges](img/var.log.slapd.no-logs.png)
+	[isx53866409@i04 slapd]$ ll -h
+	total 160K
+	-rw-r--r--. 1 root root 157K May 12 10:24 slapd.log
 
 3. Es realitza la següent ordre, per rotar el fitxer slapd.log un cop ja 
 ha sobrepassat el limit establert configurat (100K). La ordre rotarà tots 
@@ -75,10 +126,17 @@ slapd creat per a que només faci la rotació d'aquest:
 4. Es torna a comprovar que realment s'ha rotat el fitxer, i tornem a afegir-hi dades 
 (**systemctl restart slapd** x2)
 
-	![Fitxer rotat. Creat nou fitxer de logs](img/var.log.slapd.rotate1.png)
+	[isx53866409@i04 slapd]$ ll -h
+	total 160K
+	-rw-r--r--. 1 root root    0 May 12 10:24 slapd.log
+	-rw-r--r--. 1 root root 157K May 12 10:24 slapd.log-20160512-1463041625
 
-	![Visualització nou arxiu de logs](img/var.log.slapd.rotate2.png)
-
+	[isx53866409@i04 slapd]$ sudo systemctl restart slapd
+	[isx53866409@i04 slapd]$ sudo systemctl restart slapd
+	[isx53866409@i04 slapd]$ ll -h
+	total 476K
+	-rw-r--r--. 1 root root 314K May 12 10:24 slapd.log
+	-rw-r--r--. 1 root root 157K May 12 10:24 slapd.log-20160512-1463041625
 Aquests passos si es tornen a realitzar crearien un nou fitxer rotat, i 
 hauria fins un màxim de 4 rotats (per la configuració que s'ha establert 
 en el fitxer) més el fitxer slapd.log.
@@ -163,10 +221,14 @@ següent:
 de quan executar el script que es crearà, en nom de quin usuari s'executarà, 
 i el path d'on es troba el script.
 
-	![Temps per a la rotació mitjançant script](img/etc.cron.d.logrotate.png)
+		#! /bin/bash
 
-2. Crear el script amb permisos apropiats (+x). En aquest cas estarà en /var/tmp/projecte/logrotate.
+		*/1 * * * * root       /var/tmp/projecte/logrotate.sh
 
-	![Script que executa ordre per fer rotació](img/var.tmp.projecte.scriptrotacio.png)
+2. Crear el script amb permisos apropiats (+x). En aquest cas estarà en /var/tmp/projecte/logrotate.sh
+
+		#! /bin/bash
+
+		/usr/sbin/logrotate -s /var/log/logstatus /etc/logrotate.conf
 
 3. Reiniciar servei de crond per a posar-ho en funcionament
