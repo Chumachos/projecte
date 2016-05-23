@@ -136,16 +136,16 @@ Exemple pràctic: Visualització dels logs en els darrers 5min.
 
 1. Es mostrarà que no hi ha cap log:
 
-	[isx53866409@i04 scripts]$ journalctl --since "2016-05-06 12:35:00" --until "2016-05-06 12:40:00"
-	-- Logs begin at Wed 2015-09-16 11:01:36 CEST, end at Fri 2016-05-06 12:26:50 CEST. --
+		[isx53866409@i04 scripts]$ journalctl --since "2016-05-06 12:35:00" --until "2016-05-06 12:40:00"
+		-- Logs begin at Wed 2015-09-16 11:01:36 CEST, end at Fri 2016-05-06 12:26:50 CEST. --
 
 2. Encenem servei slapd, per a que generi logs: **systemctl start slapd**
 
 3. Tornem a comprovar els logs en el mateix interval de temps que abans.
 
-	[isx53866409@i04 scripts]$ journalctl --since "2016-05-06 12:35:00" --until "2016-05-06 12:40:00"
-	-- Logs begin at Wed 2015-09-16 11:01:36 CEST, end at Fri 2016-05-06 12:26:50 CEST. --
-	May 06 12:39:20 i04.informatica.escoladeltreball.org systemd[1]: Started OpenLDAP Server Daemon.
+		[isx53866409@i04 scripts]$ journalctl --since "2016-05-06 12:35:00" --until "2016-05-06 12:40:00"
+		-- Logs begin at Wed 2015-09-16 11:01:36 CEST, end at Fri 2016-05-06 12:26:50 CEST. --
+		May 06 12:39:20 i04.informatica.escoladeltreball.org systemd[1]: Started OpenLDAP Server Daemon.
 
 
 ### FILTRAR PER PROCES, USUARI O GRUPID
