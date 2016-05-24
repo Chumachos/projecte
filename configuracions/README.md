@@ -40,6 +40,7 @@ Fitxer de configuració per a la rotació de journal
 
 ## Journal centralització
 Configuració per connectar-se de client a servidor
+
 	cp journal-upload.conf /etc/systemd/journal-upload.conf
 
 Configuracions del servidor
