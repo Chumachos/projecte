@@ -16,6 +16,19 @@ Aquest repositòri està destinat a tots aquells arxius relacionats amb el proje
 
 Tots els documents han estat revisats i estudiats per mi mateix i contenen informació del títol esmentat anteriorment.
 
+## Informació dels directoris
+### configuracions
+Fitxers de configuracions editats.
+
+### documentacio
+Fitxers en format markdown amb documentació redactada per mi.
+
+### presentacio
+Fitxer de presentació en format markdown per a ser generat.
+
+### scripts-generats
+Scripts i template amb diferents funcions.
+
 ## Webgrafia
 * Syslog
 
@@ -49,5 +62,3 @@ JournalWatch (info per interès, no aplicada a la redacció del projecte)
 
 * [JournalWatch (GitHub)](https://github.com/The-Compiler/journalwatch)
 
-
-*Darrera actualització 2016-05-23_23:10*

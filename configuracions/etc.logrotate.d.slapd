@@ -1,0 +1,12 @@
+/var/log/slapd/slapd.log {
+    size 100K
+    create 0644 root root
+    rotate 4
+    copytruncate
+    dateext
+    dateformat -%Y%m%d-%s
+    postrotate
+        /var/tmp/projecte/save-logrotate.sh
+    endscript
+}
+

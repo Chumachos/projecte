@@ -1,0 +1,3 @@
+#! /bin/bash
+
+*/1 * * * * root	/var/tmp/projecte/logrotate.sh
