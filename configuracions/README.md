@@ -32,7 +32,18 @@ Script per emmagatzemar en directori de backups els fitxers de logs rotats
 
 	cp save-logrotate.sh /var/tmp/projecte/save-logrotate.sh
 
-# Journal rotate
+## Journal rotate
 Fitxer de configuració per a la rotació de journal
 
 	cp journald.conf /etc/systemd/journald.conf
+
+
+## Journal centralització
+Configuració per connectar-se de client a servidor
+	cp journal-upload.conf /etc/systemd/journal-upload.conf
+
+Configuracions del servidor
+
+	cp systemd-journal-remote.service /lib/systemd/system/systemd-journal-remote.service
+
+	cp systemd-journal-remote.socket /etc/systemd/system/sockets.target.wants/systemd-journal-remote.socket
